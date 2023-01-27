@@ -1,0 +1,11 @@
+<div align="center">
+    <h1>Delete Journal</h1>
+    <hr>
+    <p>Are you sure you want to delete the following journal?</p>
+    <p>Journal Name: {{ object.journal_name }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    </form>
+    <button><a href="{% url 'journals' %}">Cancel</a></button>
+</div>

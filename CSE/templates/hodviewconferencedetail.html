@@ -1,0 +1,38 @@
+<h1>Faculty Conference List</h1>
+<hr>
+<button><a href="{% url 'hodoptions' %}">Go back</a></button><br><br>
+<table border="5">
+    <thead>
+        <tr>
+            {% if user.role == "HOD" %}
+                <th>Faculty</th>
+            {% endif %}
+            <th>Conference name</th>
+            <th>Conference ID</th>
+            <th>Conference doi</th>
+            <th>Ugc list</th>
+            <th>Conference article</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in conferences %}
+            <tr>
+            </td>
+            {% if user.role == "HOD" %}
+               <td>{{i.fac_id.username}}</td>
+            {% endif %}
+                <td>{{i.conference_name}}</td>
+                <td>{{i.conference_id}}</td>
+                <td>{{i.conference_doi}}</td>
+                <td>{{ i.ugc_listed }}</td>
+                <td>
+                    {% if i.conference_article %}
+                      <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
+                      <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table
+

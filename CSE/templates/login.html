@@ -1,0 +1,14 @@
+<h1>Login</h1>
+<hr>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Login"><br><br>
+        Don't have an account ? <br>
+        Click here to register<button><a href="{% url 'register' %}">Register</a></button>
+        
+    </form>
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+

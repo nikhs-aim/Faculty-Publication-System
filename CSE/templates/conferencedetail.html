@@ -1,0 +1,47 @@
+<h1>My Conference List</h1>
+<hr>
+{% if user.role == "HOD" %}
+<button><a href="{% url 'options' %}">Go back</a></button><br><br>
+{% else %}
+<button><a href="{% url 'otheroptions' %}">Go back</a></button><br><br>
+{% endif %}
+<button><a href="{% url 'conf-create' %}">Add Conference</a></button>
+<table border="5">
+    <thead>
+        <tr>
+            <th>Conference name</th>
+            <th>Conference ID</th>
+            <th>Conference doi</th>
+            <th>Ugc list</th>
+            <th>Conference article</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in conferences %}
+            <tr>
+                <td>{{i.conference_name}}</td>
+                <td>{{i.conference_id}}</td>
+                <td>{{i.conference_doi}}</td>
+                <td>{{ i.ugc_listed }}</td>
+                <td>
+                    {% if i.conference_article %}
+                      <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
+                      <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{% url 'conference_update' i.pk %}" method="get">
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <button><a href="{% url 'conference_delete' i.pk %}">Delete</a></button>
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table
+

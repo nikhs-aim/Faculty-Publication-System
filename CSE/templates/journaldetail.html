@@ -1,0 +1,47 @@
+<h1>My Journal List</h1>
+<hr>
+{% if user.role == "HOD" %}
+<button><a href="{% url 'options' %}">Go back</a></button><br><br>
+{% else %}
+<button><a href="{% url 'otheroptions' %}">Go back</a></button><br><br>
+{% endif %}
+<button><a href="{% url 'journ-create' %}">Add Journal</a></button>
+<table border="5">
+    <thead>
+        <tr>
+            <th>Journal name</th>
+            <th>Journal ID</th>
+            <th>Journal doi</th>
+            <th>Ugc list</th>
+            <th>Journal article</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in journals %}
+            <tr>
+                <td>{{i.journal_name}}</td>
+                <td>{{i.journal_id}}</td>
+                <td>{{i.journal_doi}}</td>
+                <td>{{ i.ugc_listed }}</td>
+                <td>
+                    {% if i.journal_article %}
+                      <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
+                      <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{% url 'journal_update' i.pk %}" method="get">
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <button><a href="{% url 'journal_delete' i.pk %}">Delete</a></button>
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table
+

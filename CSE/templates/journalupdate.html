@@ -1,0 +1,11 @@
+<div align="center">
+    <h1>Update Journal</h1>
+    <hr>
+    <button><a href="{% url 'journals' %}">Go back</a></button>
+    <form method="post" action="{% url 'journal_update' pk=object.pk %}" enctype="multipart/form-data" style="text-align:left; margin:auto; width:50%">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Update">
+    </form>
+    
+</div>

@@ -1,0 +1,54 @@
+<html><head></head><body><div align="center">
+    <h1>Journal form</h1>
+    <hr>
+    <button><a href="/journals/">Go back</a></button>
+    <form method="post" action="" autocomplete="off" enctype="multipart/form-data" style="text-align:left; margin:auto; width:50%">
+        {% csrf_token %}
+    <p>
+         <label for="id_journal_id">Journal id:</label>
+         <input type="text" name="journal_id" maxlength="100" required="" id="id_journal_id" placeholder="Enter journal ID">
+    </p>
+
+  
+    <p>
+          <label for="id_journal_name">Journal name:</label>
+           <input type="text" name="journal_name" maxlength="255" required="" id="id_journal_name" placeholder="Enter Journal name">
+    
+    </p>
+
+  
+  <p>
+    <label for="id_journal_article">Journal article:</label>
+    <input type="file" name="journal_article" required="" id="id_journal_article">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_journal_doi">Journal doi:</label>
+    <input type="number" name="journal_doi" id="id_journal_doi" placeholder="Enter DOI">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_ugc_listed">Ugc listed:</label>
+    <select name="ugc_listed" required="" id="id_ugc_listed">
+  <option value="" selected="">---------</option>
+
+  <option value="Yes">Yes</option>
+
+  <option value="No">No</option>
+
+</select>
+    
+    
+      
+    
+  </p>
+        <input type="submit" value="submit">
+    </form>
+</div>
+</body></html>

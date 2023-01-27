@@ -1,0 +1,9 @@
+<h1>Register Your Account</h1>
+<hr>
+<form method="post" autocomplete="off">
+                {% csrf_token %}
+                {{form.as_p}}
+        <input type="submit" value="Register"><br><br><button><a href="{% url 'login' %}">Go back</a></button>
+</form>
+
+            

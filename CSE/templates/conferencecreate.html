@@ -1,0 +1,48 @@
+<html>
+<head></head>
+<body>
+    <div align="center">
+    <h1>Conference form</h1>
+    <hr>
+    <button><a href="/conferences/">Go back</a></button>
+    <form method="post" action="" autocomplete="off" enctype="multipart/form-data" style="text-align:left; margin:auto; width:50%">
+        {% csrf_token %}
+    <p>
+        <label for="id_conference_id">Conference id:</label>
+        <input type="text" name="conference_id" maxlength="100" required="" id="id_conference_id" placeholder="Enter conference ID">
+    </p>
+
+    
+    <p>
+        <label for="id_conference_name">Conference name:</label>
+        <input type="text" name="conference_name" maxlength="255" required="" id="id_conference_name" placeholder="Enter conference name">
+    </p>
+
+  
+    <p>
+        <label for="id_conference_article">Conference article:</label>
+        <input type="file" name="conference_article" required="" id="id_conference_article">
+    </p>
+
+  
+    <p>
+        <label for="id_conference_doi">Conference doi:</label>
+        <input type="number" name="conference_doi" id="id_conference_doi" placeholder="Enter DOI">
+    </p>
+
+  
+    <p>
+        <label for="id_ugc_listed">Ugc listed:</label>
+        <select name="ugc_listed" required="" id="id_ugc_listed">
+        <option value="" selected="">---------</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        </select>
+    </p>
+    
+    
+    <input type="submit" value="submit">
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div align="center">
+    <h1>Delete Conference</h1>
+    <hr>
+    <p>Are you sure you want to delete the following conference?</p>
+    <p>Conference Name: {{ object.conference_name }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    </form>
+    <button><a href="{% url 'conferences' %}">Cancel</a></button>
+</div>

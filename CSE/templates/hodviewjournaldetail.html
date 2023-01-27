@@ -1,0 +1,37 @@
+<h1>Faculty Journal List</h1>
+<hr>
+<button><a href="{% url 'hodoptions' %}">Go back</a></button><br><br>
+<table border="5">
+    <thead>
+        <tr>
+            {% if user.role == "HOD" %}
+               <th>Faculty</th>
+            {% endif %}
+            <th>Journal name</th>
+            <th>Journal ID</th>
+            <th>Journal doi</th>
+            <th>Ugc list</th>
+            <th>Journal article</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in journals %}
+            <tr>
+                {% if user.role == "HOD" %}
+                    <td>{{i.fac_id.username}}</td>
+                {% endif %}
+                <td>{{i.journal_name}}</td>
+                <td>{{i.journal_id}}</td>
+                <td>{{i.journal_doi}}</td>
+                <td>{{ i.ugc_listed }}</td>
+                <td>
+                    {% if i.journal_article %}
+                      <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
+                      <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table
+

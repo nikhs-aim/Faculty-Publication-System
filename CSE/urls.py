@@ -1,13 +1,13 @@
 from django.urls import path
 from .import views
 from django.contrib.auth.views import LogoutView
-from .views import conference_details,conferencecreate,journal_details,journalcreate,ConferenceUpdateView,JournalUpdateView,ConferenceDeleteView,JournalDeleteView
+from .views import CustomLoginView, conference_details,conferencecreate,journal_details,journalcreate,ConferenceUpdateView,JournalUpdateView,ConferenceDeleteView,JournalDeleteView
 
 
 urlpatterns = [
     path('',views.home,name='home'),
     path('register/', views.registration_view, name='register'),
-    path('login/', views.login_view, name='login'),
+    path('login/', CustomLoginView.as_view(), name='login'),
     path('hodhomeafterlogin',views.hod_home_after_login,name='hodhomeafterlogin'),
     path('otherhomeafterlogin',views.other_home_after_login,name='otherhomeafterlogin'),
     path('logout/',LogoutView.as_view(next_page='login'),name='logout'),

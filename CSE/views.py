@@ -9,6 +9,9 @@ from .forms import RegistrationForm
 from django.views.generic.edit import UpdateView
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import DeleteView
+from django.contrib.auth.views import LoginView       # view for handling user authentication and login.
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def home(request):
@@ -16,19 +19,17 @@ def home(request):
 
 
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            if user.role == "HOD":
-                return redirect('hodhomeafterlogin')
-            elif user.role == "OTHER":
-                return redirect('otherhomeafterlogin')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    form_class = AuthenticationForm         # handles the logic for validating the login form and authenticating the user.
+
+    def get_success_url(self):         # overridden to check the role of the user after login
+        user = self.request.user
+        if user.role == "HOD":
+            return reverse_lazy('hodhomeafterlogin')      # reverse_lazy - determine the URL to redirect the user
+        elif user.role == "OTHER":
+            return reverse_lazy('otherhomeafterlogin')
 
 
 

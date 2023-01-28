@@ -1,0 +1,11 @@
+<div align="center">
+    <h1>Delete Post</h1>
+    <hr>
+    <p>Are you sure you want to delete the following post?</p>
+    <p>Post Title: {{ object.post_title}}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    </form>
+    <button><a href="{% url 'mypost_details' %}">Cancel</a></button>
+</div>

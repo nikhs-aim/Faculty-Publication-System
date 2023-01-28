@@ -1,0 +1,32 @@
+<h1>Faculty Posts</h1>
+<hr>
+{% if user.role == "HOD" %}
+<button><a href="{% url 'hodhomeafterlogin' %}">Go back</a></button><br><br>
+{% else %}
+<button><a href="{% url 'otherhomeafterlogin' %}">Go back</a></button><br><br>
+{% endif %}
+<table border="5">
+    <thead>
+        <tr>
+            <th>Faculty</th>
+            <th>Title</th>
+            <th>Details</th>
+            <th>Category</th>
+            <th>Snap</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.fac_id.username }}</td>
+                <td>{{ post.post_title }}</td>
+                <td>{{ post.post_details }}</td>
+                <td>{{ post.post_category }}</td>
+                <td><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></td>
+                <td>{{ post.post_time }}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

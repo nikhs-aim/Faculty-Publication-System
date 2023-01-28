@@ -65,3 +65,25 @@ class Journal(models.Model):
     def __str__(self):
         return self.journal_name
 
+
+
+
+def validate_file_extension(value):
+    import os
+    from django.core.exceptions import ValidationError
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(u'Unsupported file extension.')
+
+class Post(models.Model):
+    category=(('conference','conference'),('journal','journal'))
+    fac_id=models.ForeignKey(Faculty,on_delete=models.CASCADE)
+    post_title=models.CharField(max_length=300,null=False,blank=False)
+    post_snap = models.ImageField(upload_to='post_images/',validators=[validate_file_extension])
+    post_details=models.TextField(max_length=1000,null=False,blank=False)
+    post_time = models.DateTimeField(auto_now_add=True)
+    post_category = models.CharField(max_length=100,choices=category)
+
+    def __str__(self):
+        return self.post_title

@@ -1,6 +1,7 @@
 <h1>Home Page</h1>
 <hr>
-<b>To see the posts:</b><button><a href="">Click Here</a></button><br><br>
+<b>To see posts:</b><button><a href="{% url 'post_details' %}">Click Here</a></button><br><br>
+<b>To update your posts:</b><button><a href="{% url 'mypost_details' %}">Click Here</a></button><br><br>
 <b>To see events:</b><button><a href="">Click Here</a></button><br><br>
 <b>To add your Publications:</b><button><a href="{% url 'options' %}">Click here</a></button><br><br>
 <b>To See Faculty Publications:</b><button><a href="{% url 'hodoptions' %}">Click here</a></button><br><br>

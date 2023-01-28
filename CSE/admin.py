@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Faculty
-from .models import Conference,Journal
+from .models import Conference,Journal,Post
 
 
 class FacultyAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class FacultyAdmin(admin.ModelAdmin):
 admin.site.register(Faculty, FacultyAdmin)
 admin.site.register(Conference)
 admin.site.register(Journal)
+admin.site.register(Post)

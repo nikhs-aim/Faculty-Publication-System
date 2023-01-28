@@ -1,0 +1,27 @@
+<h1>Faculty Posts</h1>
+<hr>
+To see details about the post and to rate, login to your account<button><a href="{% url 'login' %}">Login</a></button><br><br>
+Don't have an account? Register here <button><a href="{% url 'register' %}">Register</a></button><br><br>
+<button><a href="/">Go back</a></button><br><br>
+
+<table border="5">
+    <thead>
+        <tr>
+            <th>Faculty</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Snap</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.fac_id.username }}</td>
+                <td>{{ post.post_title }}</td>
+                <td>{{ post.post_category }}</td>
+                <td><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></td
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

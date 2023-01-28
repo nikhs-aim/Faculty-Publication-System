@@ -1,15 +1,17 @@
+from urllib import request
 from django.shortcuts import render
-from .models import Conference, Faculty,Journal
+from .models import Conference, Faculty,Journal, Post
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
-from .forms import RegistrationForm
+from .forms import PostForm, RegistrationForm
 from django.views.generic.edit import UpdateView
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView       # view for handling user authentication and login.
+from PIL import Image
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -173,3 +175,49 @@ class JournalDeleteView(DeleteView):
 
 
  
+
+
+def create_post(request):
+     if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.fac_id = request.user
+            post.save()
+            return redirect('mypost_details')
+     else:
+        form = PostForm()
+     return render(request, 'postcreate.html', {'form': form})
+
+
+
+def post_details(request):
+    if request.user.is_authenticated:
+        posts = Post.objects.all()
+        return render(request, 'postdetail.html', {'posts': posts})
+
+
+def before_login_post_details(request):
+        posts = Post.objects.all()
+        return render(request, 'beforeloginpostdetail.html', {'posts': posts})
+
+
+def my_post_details(request):
+    if request.user.is_authenticated:
+        posts = Post.objects.filter(fac_id=request.user.fac_id)
+    return render(request, 'mypostdetail.html', {'posts': posts})
+
+
+
+
+class UpdatePostView(UpdateView):
+    model = Post
+    fields = ['post_title', 'post_snap', 'post_details', 'post_category']
+    template_name = 'postupdate.html'
+    success_url = reverse_lazy('mypost_details')
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'postdelete.html'
+    success_url = reverse_lazy('mypost_details')

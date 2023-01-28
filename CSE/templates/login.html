@@ -5,10 +5,11 @@
         {{form.as_p}}
         <input type="submit" value="Login"><br><br>
         Don't have an account ? <br>
-        Click here to register<button><a href="{% url 'register' %}">Register</a></button>
+        Click here to register:<button><a href="{% url 'register' %}">Register</a></button><br><br>
         
     </form>
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
 
+To go back to home:<button><a href="{% url 'home' %}">Click here</a></button>

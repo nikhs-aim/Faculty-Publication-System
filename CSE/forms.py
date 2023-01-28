@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Faculty
-
+from django import forms
+from .models import Post
 
 
 class RegistrationForm(UserCreationForm):
@@ -15,3 +16,12 @@ class RegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Faculty
         fields = ('username', 'age', 'email', 'role', 'gender','department_name','phone_number','password1','password2')
+
+
+
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['post_title', 'post_snap', 'post_details', 'post_category']

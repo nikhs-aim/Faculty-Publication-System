@@ -92,3 +92,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.post_title
+
+
+class Event(models.Model):
+    fac_id = models.ForeignKey(Faculty,on_delete=models.CASCADE)
+    event_Location = models.TextField(max_length=500)
+    event_Name = models.CharField(max_length=200)
+    event_Date = models.CharField(max_length=100)
+    event_details=models.TextField(max_length=1000,null=False,blank=False)
+    post_event=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.event_Name

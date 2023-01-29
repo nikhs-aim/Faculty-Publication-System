@@ -1,7 +1,7 @@
 from django.urls import path
 from .import views
 from django.contrib.auth.views import LogoutView
-from .views import CustomLoginView, PostDeleteView, UpdatePostView, before_login_post_details, conference_details,conferencecreate,journal_details,journalcreate,ConferenceUpdateView,JournalUpdateView,ConferenceDeleteView,JournalDeleteView, post_details
+from .views import CustomLoginView, EventDeleteView,PostDeleteView, UpdateEventView, UpdatePostView, before_login_post_details, conference_details,conferencecreate, eventcreate,journal_details,journalcreate,ConferenceUpdateView,JournalUpdateView,ConferenceDeleteView,JournalDeleteView, post_details
 
 
 urlpatterns = [
@@ -29,6 +29,11 @@ urlpatterns = [
     path('before_login_post_details', before_login_post_details, name='before_login_post_details'),
     path('mypost_details', views.my_post_details, name='mypost_details'),
     path('update_post/<int:pk>', UpdatePostView.as_view(), name='update_post'),
-    path('post_delete/<int:pk>',PostDeleteView.as_view(),name='post_delete')
-
+    path('post_delete/<int:pk>',PostDeleteView.as_view(),name='post_delete'),
+    path('event-create', eventcreate.as_view(), name='event-create'),
+    path('event-details',views.event_details,name='event-details'),
+    path('myevent_details', views.my_event_details, name='myevent_details'),
+    path('before_login_event_details',views.before_login_event_details, name='before_login_event_details'),
+    path('update_event/<int:pk>', UpdateEventView.as_view(), name='update_event'),
+    path('event_delete/<int:pk>',EventDeleteView.as_view(),name='event_delete'),
 ]

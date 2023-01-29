@@ -1,0 +1,40 @@
+<h1>Event Details</h1>
+<hr>
+<button><a href="{% url 'event-create' %}">Add Event</a></button>
+{% if user.role == "HOD" %}
+<button><a href="{% url 'hodhomeafterlogin' %}">Go back</a></button><br><br>
+{% else %}
+<button><a href="{% url 'otherhomeafterlogin' %}">Go back</a></button><br><br>
+{% endif %}
+<table border="5">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Details</th>
+            <th>Location</th>
+            <th>Event Date and Time</th>
+            <th>Posted Time</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in events %}
+            <tr>
+                <td>{{ i.event_Name}}</td>
+                <td>{{ i.event_details }}</td>
+                <td>{{ i.event_Location }}</td>
+                <td>{{ i.event_Date }}</td>
+                <td>{{i.post_event}}</td>
+                <td>
+                    <form action="{% url 'update_event' i.id %}" method="get">
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <button><a href="{% url 'event_delete' i.id %}">Delete</a></button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

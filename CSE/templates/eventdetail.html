@@ -1,0 +1,31 @@
+<h1>Event Details</h1>
+<hr>
+{% if user.role == "HOD" %}
+<button><a href="{% url 'hodhomeafterlogin' %}">Go back</a></button><br><br>
+{% else %}
+<button><a href="{% url 'otherhomeafterlogin' %}">Go back</a></button><br><br>
+{% endif %}
+<table border="5">
+    <thead>
+        <tr>
+            <th>Faculty</th>
+            <th>Event Name</th>
+            <th>Details</th>
+            <th>Location</th>
+            <th>Event Date and Time</th>
+            <th>Posted Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in events %}
+            <tr>
+                <td>{{ i.fac_id.username }}</td>
+                <td>{{ i.event_Name}}</td>
+                <td>{{ i.event_details }}</td>
+                <td>{{ i.event_Location }}</td>
+                <td>{{ i.event_Date }}</td>
+                <td>{{i.post_event}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

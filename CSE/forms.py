@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Faculty
 from django import forms
-from .models import Post
+from .models import Post,Event
 
 
 class RegistrationForm(UserCreationForm):
@@ -29,3 +29,5 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['post_title', 'post_snap', 'post_details', 'post_category']
+
+

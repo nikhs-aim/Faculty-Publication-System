@@ -1,6 +1,6 @@
 <h1>Post Update</h1>
 <hr>
-
+<button><a href="{% url 'mypost_details' %}">Go back</a></button>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

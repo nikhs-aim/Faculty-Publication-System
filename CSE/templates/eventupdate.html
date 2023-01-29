@@ -1,0 +1,8 @@
+<h1>Event Update</h1>
+<hr>
+<button><a href="{% url 'myevent_details' %}">Go back</a></button>
+<form method="post" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update Event">
+</form>

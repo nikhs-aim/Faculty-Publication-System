@@ -11,7 +11,7 @@ from django.views.generic.edit import UpdateView
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView       # view for handling user authentication and login.
-from PIL import Image
+from .models import Event
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -221,3 +221,45 @@ class PostDeleteView(DeleteView):
     model = Post
     template_name = 'postdelete.html'
     success_url = reverse_lazy('mypost_details')
+
+
+
+
+class eventcreate(CreateView):
+    model=Event
+    fields = ['event_Name','event_Location','event_details','event_Date']
+    template_name='eventcreate.html'
+    success_url=reverse_lazy('event-details')
+
+    def form_valid(self, form):
+        fac = Faculty.objects.get(username=self.request.user)
+        form.instance.fac_id = fac
+        return super().form_valid(form)
+
+
+def event_details(request):
+    if request.user.is_authenticated:
+        events = Event.objects.all()
+        return render(request, 'eventdetail.html', {'events': events})
+
+def my_event_details(request):
+    if request.user.is_authenticated:
+        events = Event.objects.filter(fac_id=request.user.fac_id)
+    return render(request, 'myeventdetail.html', {'events': events})
+
+def before_login_event_details(request):
+        events = Event.objects.all()
+        return render(request, 'beforelogineventdetail.html', {'events': events})
+
+
+class UpdateEventView(UpdateView):
+    model = Event
+    fields = ['event_Name','event_Location','event_details','event_Date']
+    template_name = 'eventupdate.html'
+    success_url = reverse_lazy('myevent_details')
+
+class EventDeleteView(DeleteView):
+    model = Event
+    template_name = 'eventdelete.html'
+    success_url = reverse_lazy('myevent_details')
+

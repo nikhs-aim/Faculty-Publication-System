@@ -1,0 +1,27 @@
+<h1>Event Details</h1>
+<hr>
+To see details about the event, login to your account<button><a href="{% url 'login' %}">Login</a></button><br><br>
+Don't have an account? Register here <button><a href="{% url 'register' %}">Register</a></button><br><br>
+<button><a href="/">Go back</a></button><br><br>
+
+
+<table border="5">
+    <thead>
+        <tr>
+            <th>Faculty</th>
+            <th>Event Name</th>
+            <th>Location</th>
+            <th>Posted Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in events %}
+            <tr>
+                <td>{{ i.fac_id.username }}</td>
+                <td>{{ i.event_Name}}</td>
+                <td>{{ i.event_Location }}</td>
+                <td>{{i.post_event}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

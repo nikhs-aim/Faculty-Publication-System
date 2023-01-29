@@ -7,7 +7,7 @@ import os,re
 import uuid
 
 class Faculty(AbstractUser):
-    
+    name=models.CharField(max_length=100,default='Your Name',unique=False)
     age = models.PositiveIntegerField(default=0)
     GENDER_CHOICES = (
         ('male', 'Male'),
@@ -18,12 +18,17 @@ class Faculty(AbstractUser):
     phone_number = models.CharField(max_length=15, null=False, blank=False,unique=True)
     ROLE=(('HOD','HOD'),('OTHER','OTHER'))
     role=models.CharField(max_length=10,choices=ROLE,default='OTHER')
-    fac_id=models.UUIDField(default=uuid.uuid4(),null=False,blank=False,primary_key=True,editable='false')
-
+    fac_id=models.UUIDField(default=uuid.uuid4(),primary_key=True,editable=False)
+    
+    
     def clean(self):
         if not re.match(r'^(?:\+\d{2})?\d{10}$', self.phone_number):
             raise ValidationError("Invalid phone number format, it should be in the format of +91xxxxxxxxxx ")
     
+    def save(self, *args, **kwargs):           # the uuid is created on the basis of the username which is unique
+        self.fac_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.username)
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.username
 

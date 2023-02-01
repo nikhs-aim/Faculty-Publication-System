@@ -5,12 +5,10 @@ from .views import CustomLoginView, EventDeleteView,PostDeleteView, UpdateEventV
 
 
 urlpatterns = [
-    path('',views.home,name='home'),
+    path('', before_login_post_details,name='before_login_post_details'),
     path('register/', views.registration_view, name='register'),
     path('login/', CustomLoginView.as_view(), name='login'),
-    path('hodhomeafterlogin',views.hod_home_after_login,name='hodhomeafterlogin'),
-    path('otherhomeafterlogin',views.other_home_after_login,name='otherhomeafterlogin'),
-    path('logout/',LogoutView.as_view(next_page='login'),name='logout'),
+    path('logout/',LogoutView.as_view(next_page='before_login_post_details'),name='logout'),
     path('options',views.Options,name='options'),
     path('hodoptions',views.hod_options,name='hodoptions'),
     path('otheroptions',views.other_option,name='otheroptions'),
@@ -26,7 +24,6 @@ urlpatterns = [
     path('journals/<str:pk>/delete/', JournalDeleteView.as_view(), name='journal_delete'),
     path('create_post/', views.create_post, name='create_post'),
     path('post_details', post_details, name='post_details'),
-    path('before_login_post_details', before_login_post_details, name='before_login_post_details'),
     path('mypost_details', views.my_post_details, name='mypost_details'),
     path('update_post/<int:pk>', UpdatePostView.as_view(), name='update_post'),
     path('post_delete/<int:pk>',PostDeleteView.as_view(),name='post_delete'),
@@ -36,4 +33,5 @@ urlpatterns = [
     path('before_login_event_details',views.before_login_event_details, name='before_login_event_details'),
     path('update_event/<int:pk>', UpdateEventView.as_view(), name='update_event'),
     path('event_delete/<int:pk>',EventDeleteView.as_view(),name='event_delete'),
+    path('to_add_publications',views.to_add_publications,name='to_add_publications')
 ]

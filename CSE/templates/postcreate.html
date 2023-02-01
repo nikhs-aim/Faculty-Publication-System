@@ -1,4 +1,6 @@
 <h1>Create a new post</h1>
+<button><a href="{% url 'post_details' %}">Go Back</a></button>
+
 <hr>
     <form method="post" enctype="multipart/form-data" >
         {% csrf_token %}

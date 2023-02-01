@@ -1,10 +1,18 @@
-<h1>Faculty Posts</h1>
-<hr>
+<h1 align="center" >Home Page</h1>
+<hr color="magenta" size="5">
+<button><a href="{% url 'event-details' %}">Events</a></button>
 {% if user.role == "HOD" %}
-<button><a href="{% url 'hodhomeafterlogin' %}">Go back</a></button><br><br>
-{% else %}
-<button><a href="{% url 'otherhomeafterlogin' %}">Go back</a></button><br><br>
+<button style="margin: 5px;"><a href="{% url 'hodoptions' %}">Faculty Publications</a></button>
 {% endif %}
+<button style="margin: 5px;"><a href="{% url 'options' %}">Add Publications</a></button>
+<button><a href="{% url 'logout' %}">Logout</a></button>
+
+
+<hr color="magenta" size="5">
+
+<h2><u>Faculty Posts</u></h2><hr>
+<button><a href="{% url 'create_post' %}">Add Post</a></button>
+<button style="margin: 10px;"><a href="{% url 'mypost_details' %}">Edit Post</a></button>
 <table border="5">
     <thead>
         <tr>
@@ -23,7 +31,7 @@
                 <td>{{ post.post_title }}</td>
                 <td>{{ post.post_details }}</td>
                 <td>{{ post.post_category }}</td>
-                <td><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></td>
+                <td><a href="{{ post.post_snap.url }}" target="_blank"><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></a></td>
                 <td>{{ post.post_time }}</td>
                 
             </tr>

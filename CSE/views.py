@@ -16,8 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-def home(request):
-    return render (request,'home.html')
+
 
 
 
@@ -29,9 +28,9 @@ class CustomLoginView(LoginView):
     def get_success_url(self):         # overridden to check the role of the user after login
         user = self.request.user
         if user.role == "HOD":
-            return reverse_lazy('hodhomeafterlogin')      # reverse_lazy - determine the URL to redirect the user
+            return reverse_lazy('post_details')      # reverse_lazy - determine the URL to redirect the user
         elif user.role == "OTHER":
-            return reverse_lazy('otherhomeafterlogin')
+            return reverse_lazy('post_details')
 
 
 
@@ -48,13 +47,8 @@ def registration_view(request):
 
 
 
-def other_home_after_login(request):
-    return render(request,'otherhomeafterlogin.html')
-    
-
-def hod_home_after_login(request):
-    return render (request,'hodhomeafterlogin.html')
-
+def to_add_publications(request):
+    return render(request,'toaddpublications.html')
 
 def Options(request):
     return render(request,'options.html')
@@ -184,7 +178,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.fac_id = request.user
             post.save()
-            return redirect('mypost_details')
+            return redirect('post_details')
      else:
         form = PostForm()
      return render(request, 'postcreate.html', {'form': form})

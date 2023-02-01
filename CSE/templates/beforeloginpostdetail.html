@@ -1,9 +1,16 @@
-<h1>Faculty Posts</h1>
-<hr>
-To see details about the post and to rate, login to your account<button><a href="{% url 'login' %}">Login</a></button><br><br>
-Don't have an account? Register here <button><a href="{% url 'register' %}">Register</a></button><br><br>
-<button><a href="/">Go back</a></button><br><br>
+<h1 align="center">Home Page</h1>
+<hr color="pink" size="5">
+<button><a href="{% url 'before_login_event_details' %}">Events</a></button>
+<button style="margin: 5px;"><a href="{% url 'to_add_publications' %}">Add Publications</a></button>
+<button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button>
+<button style="margin: 5px;"><a href="{% url 'register' %}">Register</a></button>
 
+<hr color="pink" size="5">
+
+
+<h2><u>Faculty Posts</u></h2>
+
+To see details about the post and to rate, login to your account<br><hr>
 <table border="5">
     <thead>
         <tr>
@@ -19,7 +26,7 @@ Don't have an account? Register here <button><a href="{% url 'register' %}">Regi
                 <td>{{ post.fac_id.username }}</td>
                 <td>{{ post.post_title }}</td>
                 <td>{{ post.post_category }}</td>
-                <td><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></td
+                <td><a href="{{ post.post_snap.url }}" target="_blank"><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></a></td>
                 
             </tr>
         {% endfor %}

@@ -1,11 +1,9 @@
 <h1>Event Details</h1>
 <hr>
-<button><a href="{% url 'event-create' %}">Add Event</a></button>
-{% if user.role == "HOD" %}
-<button><a href="{% url 'hodhomeafterlogin' %}">Go back</a></button><br><br>
-{% else %}
-<button><a href="{% url 'otherhomeafterlogin' %}">Go back</a></button><br><br>
-{% endif %}
+
+
+<button><a href="{% url 'event-details' %}">Go back</a></button><br><br>
+
 <table border="5">
     <thead>
         <tr>

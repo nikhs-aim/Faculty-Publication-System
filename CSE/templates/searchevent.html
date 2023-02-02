@@ -1,0 +1,56 @@
+<body style="background-color:moccasin;">
+<h1 align="center">Search Events</h1><hr>
+
+{% if user.is_authenticated %}
+  <button><a href="{% url 'event-details' %}">Go back</a></button><br><br>
+{% else %}
+  <button><a href="{% url 'before_login_event_details' %}">Go back</a></button><br><br>
+{% endif %}
+
+<form action="{% url 'searchevents' %}" method="get">
+    <input type="text" name="e" value="{{ request.GET.e }}" placeholder="Enter faculty name or Event name">
+    <input type="submit" name="submit" value="Search">
+  </form>
+  
+
+  {% if submit %}
+    <h3>Search results for "{{ request.GET.e }}"</h3>
+    {% if results %}
+      <table border="5">
+        <thead>
+          <tr>
+            <th>Faculty</th>
+            <th>Event Name</th>
+            <th>Details</th>
+            <th>Location</th>
+            <th>Event Date and Time</th>
+            <th>Posted Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in results %}
+            <tr>
+                <td>{{ i.fac_id.username }}</td>
+                <td>{{ i.event_Name}}</td>
+                {% if user.is_authenticated %}
+                <td>{{ i.event_details }}</td>
+                {% else %}
+                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                {% endif %}
+                <td>{{ i.event_Location }}</td>
+                {% if user.is_authenticated %}
+                <td>{{ i.event_Date }}</td>
+                {% else %}
+                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                {% endif %}
+                <td>{{i.post_event}}</td>
+                
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found</p>
+    {% endif %}
+  {% endif %}
+</body>

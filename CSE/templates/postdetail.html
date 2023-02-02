@@ -1,5 +1,7 @@
+<body style="background-color:moccasin;">
+
 <h1 align="center" >Home Page</h1>
-<hr color="magenta" size="5">
+<hr color="black" size="5">
 <button><a href="{% url 'event-details' %}">Events</a></button>
 {% if user.role == "HOD" %}
 <button style="margin: 5px;"><a href="{% url 'hodoptions' %}">Faculty Publications</a></button>
@@ -8,11 +10,12 @@
 <button><a href="{% url 'logout' %}">Logout</a></button>
 
 
-<hr color="magenta" size="5">
+<hr color="black" size="5">
 
 <h2><u>Faculty Posts</u></h2><hr>
-<button><a href="{% url 'create_post' %}">Add Post</a></button>
+<button style="margin: 10px;"><a href="{% url 'create_post' %}">Add Post</a></button>
 <button style="margin: 10px;"><a href="{% url 'mypost_details' %}">Edit Post</a></button>
+<button style="margin: 10px;"><a href="{% url 'searchposts' %}">Search</a></button>
 <table border="5">
     <thead>
         <tr>
@@ -22,6 +25,7 @@
             <th>Category</th>
             <th>Snap</th>
             <th>Time</th>
+    
         </tr>
     </thead>
     <tbody>
@@ -38,3 +42,4 @@
         {% endfor %}
     </tbody>
 </table>
+</body>

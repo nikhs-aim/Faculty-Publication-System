@@ -1,16 +1,19 @@
+<body style="background-color:moccasin;">
+
 <h1 align="center">Home Page</h1>
-<hr color="pink" size="5">
+<hr color="black" size="5">
 <button><a href="{% url 'before_login_event_details' %}">Events</a></button>
 <button style="margin: 5px;"><a href="{% url 'to_add_publications' %}">Add Publications</a></button>
 <button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button>
 <button style="margin: 5px;"><a href="{% url 'register' %}">Register</a></button>
 
-<hr color="pink" size="5">
+<hr color="black" size="5">
 
 
 <h2><u>Faculty Posts</u></h2>
 
 To see details about the post and to rate, login to your account<br><hr>
+<button><a href="{% url 'searchposts' %}">Search</a></button>
 <table border="5">
     <thead>
         <tr>
@@ -32,3 +35,4 @@ To see details about the post and to rate, login to your account<br><hr>
         {% endfor %}
     </tbody>
 </table>
+</body>

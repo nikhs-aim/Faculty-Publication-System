@@ -1,0 +1,55 @@
+<body style="background-color:moccasin;">
+<h1 align="center">Search Posts</h1><hr>
+
+{% if user.is_authenticated %}
+  <button><a href="{% url 'post_details' %}">Go back</a></button><br><br>
+{% else %}
+  <button><a href="{% url 'before_login_post_details' %}">Go back</a></button><br><br>
+{% endif %}
+
+<form action="{% url 'searchposts' %}" method="get">
+    <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Enter faculty name">
+    <input type="submit" name="submit" value="Search">
+  </form>
+  
+
+  {% if submit %}
+    <h3>Search results for "{{ request.GET.q }}"</h3>
+    {% if results %}
+      <table border="5">
+        <thead>
+          <tr>
+            <th>Faculty</th>
+            <th>Title</th>
+            <th>Details</th>
+            <th>Category</th>
+            <th>Snap</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in results %}
+            <tr>
+                <td>{{ post.fac_id.username }}</td>
+                <td>{{ post.post_title }}</td>
+                {% if user.is_authenticated %}
+                <td>{{ post.post_details }}</td>
+                {% else %}
+                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                {% endif %}
+                <td>{{ post.post_category }}</td>
+                <td><a href="{{ post.post_snap.url }}" target="_blank"><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></a></td>
+                {% if user.is_authenticated %}
+                <td>{{ post.post_time }}</td>
+                {% else %}
+                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found</p>
+    {% endif %}
+  {% endif %}
+</body>

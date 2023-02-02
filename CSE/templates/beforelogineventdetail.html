@@ -1,8 +1,10 @@
+<body style="background-color:moccasin;">
 <h1>Event Details</h1>
 <hr>
 To see details about the event, login to your account<button><a href="{% url 'login' %}">Login</a></button><br><br>
 Don't have an account? Register here <button><a href="{% url 'register' %}">Register</a></button><br><br>
-<button><a href="/">Go back</a></button><br><br>
+<button style="margin: 5px;"><a href="{% url 'searchevents' %}">Search</a></button>
+<button style="margin: 5px;"><a href="/">Go back</a></button><br><br>
 
 
 <table border="5">
@@ -25,3 +27,4 @@ Don't have an account? Register here <button><a href="{% url 'register' %}">Regi
         {% endfor %}
     </tbody>
 </table>
+</body>

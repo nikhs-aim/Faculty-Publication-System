@@ -1,9 +1,11 @@
+<body style="background-color:moccasin;">
 <h1>Event Details</h1>
 <hr>
 
-<button><a href="{% url 'post_details' %}">Go back</a></button>
-<button><a href="{% url 'event-create' %}">Add Event</a></button>
-<button><a href="{% url 'myevent_details' %}">Edit</a></button>
+<button style="margin: 10px;"><a href="{% url 'post_details' %}">Go back</a></button>
+<button style="margin: 10px;"><a href="{% url 'event-create' %}">Add Event</a></button>
+<button style="margin: 10px;"><a href="{% url 'searchevents' %}">Search</a></button>
+<button style="margin: 10px;"><a href="{% url 'myevent_details' %}">Edit</a></button>
 
 <table border="5">
     <thead>
@@ -29,3 +31,4 @@
         {% endfor %}
     </tbody>
 </table>
+</body>

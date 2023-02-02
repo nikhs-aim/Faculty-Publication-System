@@ -14,7 +14,7 @@ from django.contrib.auth.views import LoginView       # view for handling user a
 from .models import Event
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.db.models import Q
 
 
 
@@ -85,7 +85,7 @@ class conferencecreate(CreateView):
     template_name='conferencecreate.html'
     success_url=reverse_lazy('conferences')
    
-    def form_valid(self, form):
+    def form_valid(self, form):   #create conference for that ogged in user
         fac = Faculty.objects.get(username=self.request.user)
         form.instance.fac_id = fac
         return super().form_valid(form)
@@ -257,3 +257,62 @@ class EventDeleteView(DeleteView):
     template_name = 'eventdelete.html'
     success_url = reverse_lazy('myevent_details')
 
+
+
+def search_post(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+        submit = request.GET.get('submit')
+
+        if query:
+            results = Post.objects.filter(fac_id__name__icontains=query)
+            return render(request, 'searchpost.html', {'results': results, 'submit': submit})
+
+    return render(request, 'searchpost.html')
+
+
+
+def search_event(request):
+    if request.method == 'GET':
+        query = request.GET.get('e')
+        submit = request.GET.get('submit')
+
+        if query:
+            results = Event.objects.filter(Q(event_Name__icontains=query) | Q(fac_id__name__icontains=query))
+            return render(request, 'searchevent.html', {'results': results, 'submit': submit})
+
+    return render(request, 'searchevent.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def like_post(request):
+    if request.method == 'POST':
+        post = Post.objects.get(id=request.POST['post_id'])
+        if request.user in post.likes.all():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        post.post_likes = post.likes.count()
+        post.save()
+    return redirect('post_details')

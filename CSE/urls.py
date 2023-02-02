@@ -33,5 +33,8 @@ urlpatterns = [
     path('before_login_event_details',views.before_login_event_details, name='before_login_event_details'),
     path('update_event/<int:pk>', UpdateEventView.as_view(), name='update_event'),
     path('event_delete/<int:pk>',EventDeleteView.as_view(),name='event_delete'),
-    path('to_add_publications',views.to_add_publications,name='to_add_publications')
+    path('to_add_publications',views.to_add_publications,name='to_add_publications'),
+    path('like_post/', views.like_post, name='like_post'),
+    path('searchposts',views.search_post,name='searchposts',),
+    path('searchevents',views.search_event,name='searchevents')
 ]

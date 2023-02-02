@@ -2,11 +2,12 @@
 <h1>My Journal List</h1>
 <hr>
 {% if user.role == "HOD" %}
-<button><a href="{% url 'options' %}">Go back</a></button><br><br>
+<button style="margin: 10px;"><a href="{% url 'options' %}">Go back</a></button>
 {% else %}
-<button><a href="{% url 'otheroptions' %}">Go back</a></button><br><br>
+<button style="margin: 10px;"><a href="{% url 'otheroptions' %}">Go back</a></button>
 {% endif %}
-<button><a href="{% url 'journ-create' %}">Add Journal</a></button>
+<button style="margin: 10px;"><a href="{% url 'journ-create' %}">Add Journal</a></button>
+<button style="margin: 10px;"><a href="{% url 'searchjpublications' %}">Search</a></button>
 <table border="5">
     <thead>
         <tr>

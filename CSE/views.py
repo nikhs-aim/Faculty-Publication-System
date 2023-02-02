@@ -284,18 +284,55 @@ def search_event(request):
     return render(request, 'searchevent.html')
 
 
+def search_c_publications(request):
+    if request.method == 'GET':
+        query = request.GET.get('c')
+        submit = request.GET.get('submit')
+
+        if query:
+            results = Conference.objects.filter(conference_name__icontains=query)
+            return render(request, 'searchpublications.html', {'results': results, 'submit': submit})
+
+    return render(request, 'searchpublications.html')
+
+
+def search_j_publications(request):
+    if request.method == 'GET':
+        query = request.GET.get('j')
+        submit = request.GET.get('submit')
+
+        if query:
+            results = Journal.objects.filter(journal_name__icontains=query)
+            return render(request, 'searchjpublications.html', {'results': results, 'submit': submit})
+
+    return render(request, 'searchjpublications.html')
 
 
 
 
+def search_fac_c_publications(request):
+    if request.method == 'GET':
+        query = request.GET.get('cc')
+        submit = request.GET.get('submit')
+
+        if query:
+            results = Conference.objects.filter(fac_id__name__icontains=query)
+            return render(request, 'searchfacpublications.html', {'results': results, 'submit': submit})
+
+    return render(request, 'searchfacpublications.html')
 
 
 
+def search_fac_j_publications(request):
+    if request.method == 'GET':
+        query = request.GET.get('jj')
+        submit = request.GET.get('submit')
 
+        if query:
+            results = Journal.objects.filter(fac_id__name__icontains=query)
+            return render(request, 'searchfacjpublications.html', {'results': results, 'submit': submit})
 
-
-
-
+    return render(request, 'searchfacjpublications.html')
 
 
 

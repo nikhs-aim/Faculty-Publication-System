@@ -1,0 +1,51 @@
+<body style="background-color:moccasin;">
+    <h1 align="center">Search Faculty Journal Publications</h1><hr>
+    
+    
+      <button><a href="{% url 'hodviewotherjourn' %}">Go back</a></button><br><br>
+    
+    
+    <form action="{% url 'searchfacjpublications' %}" method="get">
+        <input type="text" name="jj" value="{{ request.GET.jj }}" placeholder="Enter Faculty name">
+        <input type="submit" name="submit" value="Search ">
+      </form>
+      
+    
+    {% if submit %}
+    <h3>Search results for "{{ request.GET.jj }}"</h3>
+    {% if results %}
+      <table border="5">
+        <thead>
+          <tr>
+            <th>Faculty</th>
+            <th>Journal name</th>
+            <th>Journal ID</th>
+            <th>Journal doi</th>
+            <th>Ugc list</th>
+            <th>Journal article</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in results %}
+          <tr>
+            <td>{{i.fac_id.username}}</td>
+               
+            <td>{{i.journal_name}}</td>
+            <td>{{i.journal_id}}</td>
+            <td>{{i.journal_doi}}</td>
+            <td>{{ i.ugc_listed }}</td>
+            <td>
+                {% if i.journal_article %}
+                  <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
+                  <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                {% endif %}
+            </td>
+         </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found</p>
+    {% endif %}
+  {% endif %}
+</body>

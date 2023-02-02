@@ -36,5 +36,9 @@ urlpatterns = [
     path('to_add_publications',views.to_add_publications,name='to_add_publications'),
     path('like_post/', views.like_post, name='like_post'),
     path('searchposts',views.search_post,name='searchposts',),
-    path('searchevents',views.search_event,name='searchevents')
+    path('searchevents',views.search_event,name='searchevents'),
+    path('searchpublications',views.search_c_publications,name='searchpublications'),
+    path('searchjpublications',views.search_j_publications,name='searchjpublications'),
+    path('searchfacpublications',views.search_fac_c_publications,name='searchfacpublications'),
+    path('searchfacjpublications',views.search_fac_j_publications,name='searchfacjpublications'),
 ]

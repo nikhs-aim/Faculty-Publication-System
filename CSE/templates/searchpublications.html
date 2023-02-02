@@ -1,0 +1,59 @@
+<body style="background-color:moccasin;">
+    <h1 align="center">Search your Publications</h1><hr>
+    
+    
+      <button><a href="{% url 'conferences' %}">Go back</a></button><br><br>
+    
+    
+    <form action="{% url 'searchpublications' %}" method="get">
+        <input type="text" name="c" value="{{ request.GET.c }}" placeholder="Enter conference name">
+        <input type="submit" name="submit" value="Search ">
+      </form>
+      
+    
+    {% if submit %}
+    <h3>Search results for "{{ request.GET.c }}"</h3>
+    {% if results %}
+      <table border="5">
+        <thead>
+          <tr>
+            <th>Conference name</th>
+            <th>Conference ID</th>
+            <th>Conference doi</th>
+            <th>Ugc list</th>
+            <th>Conference article</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in results %}
+          <tr>
+              <td>{{i.conference_name}}</td>
+              <td>{{i.conference_id}}</td>
+              <td>{{i.conference_doi}}</td>
+              <td>{{ i.ugc_listed }}</td>
+              <td>
+                  {% if i.conference_article %}
+                    <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
+                    <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                  {% endif %}
+              </td>
+              <td>
+                  <form action="{% url 'conference_update' i.pk %}" method="get">
+                      <input type="submit" value="Update">
+                  </form>
+              </td>
+              <td>
+                  <button><a href="{% url 'conference_delete' i.pk %}">Delete</a></button>
+              </td>
+              
+          </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found</p>
+    {% endif %}
+  {% endif %}
+</body>

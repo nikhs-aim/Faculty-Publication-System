@@ -1,0 +1,54 @@
+<body style="background-color:moccasin;">
+    <h1 align="center">Search Faculty Conference Publications</h1><hr>
+    
+    
+      <button><a href="{% url 'hodviewotherconf' %}">Go back</a></button><br><br>
+    
+    
+    <form action="{% url 'searchfacpublications' %}" method="get">
+        <input type="text" name="cc" value="{{ request.GET.cc }}" placeholder="Enter Faculty name">
+        <input type="submit" name="submit" value="Search ">
+      </form>
+      
+    
+    {% if submit %}
+    <h3>Search results for "{{ request.GET.cc }}"</h3>
+    {% if results %}
+      <table border="5">
+        <thead>
+          <tr>
+            
+            <th>Faculty</th>
+            <th>Conference name</th>
+            <th>Conference ID</th>
+            <th>Conference doi</th>
+            <th>Ugc list</th>
+            <th>Conference article</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in results %}
+          <tr>
+           
+           
+            <td>{{i.fac_id.username}}</td>
+        
+             <td>{{i.conference_name}}</td>
+             <td>{{i.conference_id}}</td>
+             <td>{{i.conference_doi}}</td>
+             <td>{{ i.ugc_listed }}</td>
+             <td>
+                 {% if i.conference_article %}
+                   <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
+                   <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                 {% endif %}
+             </td>
+         </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found</p>
+    {% endif %}
+  {% endif %}
+</body>

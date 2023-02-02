@@ -17,7 +17,7 @@ Don't have an account? Register here <button><a href="{% url 'register' %}">Regi
         </tr>
     </thead>
     <tbody>
-        {% for i in events %}
+        {% for i in events reversed %}
             <tr>
                 <td>{{ i.fac_id.username }}</td>
                 <td>{{ i.event_Name}}</td>

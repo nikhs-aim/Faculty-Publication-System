@@ -24,7 +24,7 @@ To see details about the post and to rate, login to your account<br><hr>
         </tr>
     </thead>
     <tbody>
-        {% for post in posts %}
+        {% for post in posts reversed %}
             <tr>
                 <td>{{ post.fac_id.username }}</td>
                 <td>{{ post.post_title }}</td>

@@ -12,8 +12,6 @@ from django.http import HttpResponseRedirect
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView       # view for handling user authentication and login.
 from .models import Event
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 
@@ -26,11 +24,8 @@ class CustomLoginView(LoginView):
     form_class = AuthenticationForm         # handles the logic for validating the login form and authenticating the user.
 
     def get_success_url(self):         # overridden to check the role of the user after login
-        user = self.request.user
-        if user.role == "HOD":
-            return reverse_lazy('post_details')      # reverse_lazy - determine the URL to redirect the user
-        elif user.role == "OTHER":
-            return reverse_lazy('post_details')
+        self.request.user
+        return reverse_lazy('post_details')      # reverse_lazy - determine the URL to redirect the user
 
 
 

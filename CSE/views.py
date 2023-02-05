@@ -24,14 +24,15 @@ class CustomLoginView(LoginView):
     form_class = AuthenticationForm         # handles the logic for validating the login form and authenticating the user.
 
     def get_success_url(self):         # overridden to check the role of the user after login
-        self.request.user
+        user=self.request.user
+        print(f"User {user.username} has logged in.")
         return reverse_lazy('post_details')      # reverse_lazy - determine the URL to redirect the user
 
 
 
 
 def registration_view(request):
-    if request.method == 'POST':
+    if request.method == 'POST': 
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user=form.save()
@@ -260,11 +261,24 @@ def search_post(request):
         submit = request.GET.get('submit')
 
         if query:
+            
             results = Post.objects.filter(fac_id__name__icontains=query)
             return render(request, 'searchpost.html', {'results': results, 'submit': submit})
 
     return render(request, 'searchpost.html')
 
+
+def search_your_post(request):
+    if request.method == 'GET':
+        query = request.GET.get('qq')
+        submit = request.GET.get('submit')
+
+        if query:
+            faculty = Faculty.objects.get(username=request.user.username)
+            results = Post.objects.filter(post_title__icontains=query,fac_id_id=faculty.fac_id)
+            return render(request, 'searchyourpost.html', {'results': results, 'submit': submit})
+
+    return render(request, 'searchyourpost.html')
 
 
 def search_event(request):
@@ -284,11 +298,14 @@ def search_c_publications(request):
         query = request.GET.get('c')
         submit = request.GET.get('submit')
 
-        if query:
-            results = Conference.objects.filter(conference_name__icontains=query)
+        if query and request.user.is_authenticated:
+            faculty = Faculty.objects.get(username=request.user.username)
+            results = Conference.objects.filter(conference_name__icontains=query, fac_id_id=faculty.fac_id)
             return render(request, 'searchpublications.html', {'results': results, 'submit': submit})
 
     return render(request, 'searchpublications.html')
+
+
 
 
 def search_j_publications(request):
@@ -296,8 +313,9 @@ def search_j_publications(request):
         query = request.GET.get('j')
         submit = request.GET.get('submit')
 
-        if query:
-            results = Journal.objects.filter(journal_name__icontains=query)
+        if query and request.user.is_authenticated:
+            faculty = Faculty.objects.get(username=request.user.username)
+            results = Journal.objects.filter(journal_name__icontains=query,fac_id_id=faculty.fac_id)
             return render(request, 'searchjpublications.html', {'results': results, 'submit': submit})
 
     return render(request, 'searchjpublications.html')
@@ -310,8 +328,9 @@ def search_fac_c_publications(request):
         query = request.GET.get('cc')
         submit = request.GET.get('submit')
 
-        if query:
-            results = Conference.objects.filter(fac_id__name__icontains=query)
+        if query and request.user.is_authenticated:
+            faculty = Faculty.objects.get(username=request.user.username)
+            results = Conference.objects.exclude(fac_id=faculty).filter(fac_id__name__icontains=query)
             return render(request, 'searchfacpublications.html', {'results': results, 'submit': submit})
 
     return render(request, 'searchfacpublications.html')
@@ -323,8 +342,9 @@ def search_fac_j_publications(request):
         query = request.GET.get('jj')
         submit = request.GET.get('submit')
 
-        if query:
-            results = Journal.objects.filter(fac_id__name__icontains=query)
+        if query and request.user.is_authenticated:
+            faculty = Faculty.objects.get(username=request.user.username)
+            results = Journal.objects.exclude(fac_id=faculty).filter(fac_id__name__icontains=query)
             return render(request, 'searchfacjpublications.html', {'results': results, 'submit': submit})
 
     return render(request, 'searchfacjpublications.html')

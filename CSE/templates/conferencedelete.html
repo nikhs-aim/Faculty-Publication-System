@@ -1,14 +1,29 @@
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
 
-<body style="background-color:moccasin;">
+
+
+<body>
 <div align="center">
     <h1>Delete Conference</h1>
-    <hr>
+    <hr color="black" size="5">
     <p>Are you sure you want to delete the following conference?</p>
-    <p>Conference Name: {{ object.conference_name }}</p>
+    <p>Conference Name: <b>{{ object.conference_name }}</b></p>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" value="Confirm">
-    </form>
-    <button><a href="{% url 'conferences' %}">Cancel</a></button>
+        <input class="btn btn-danger" type="submit" value="Confirm">
+    </form><br>
+    
+        <form action="{% url 'conferences' %}" method="get">
+          <input class="btn btn-success" type="submit" value="Cancel">
+      </form>
+ 
 </div>
 </body>
+{% endblock %}

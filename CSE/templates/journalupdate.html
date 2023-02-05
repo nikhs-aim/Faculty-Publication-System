@@ -1,13 +1,24 @@
-<body style="background-color:moccasin;">
+{%  extends 'main.html' %}
+{% block content %}<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+
+    
+<body >
 <div align="center">
     <h1>Update Journal</h1>
-    <hr>
-    <button><a href="{% url 'journals' %}">Go back</a></button>
+    <hr color="black" size="5">
+    <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'journals' %}">Go back</a></button>
     <form method="post" action="{% url 'journal_update' pk=object.pk %}" enctype="multipart/form-data" style="text-align:left; margin:auto; width:50%">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="Update">
+        <input class="btn btn-success" type="submit" value="Update">
     </form>
     
 </div>
 </body>
+{% endblock %}

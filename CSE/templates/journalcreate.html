@@ -1,8 +1,17 @@
 
-<html><head></head><body style="background-color:moccasin;"><div align="center">
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+    <div align="center">
     <h1>Journal form</h1>
-    <hr>
-    <button><a href="/journals/">Go back</a></button>
+    <hr color="black" size="5">
+    <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="/journals/">Go back</a></button>
     <form method="post" action="" autocomplete="off" enctype="multipart/form-data" style="text-align:left; margin:auto; width:50%">
         {% csrf_token %}
     <p>
@@ -27,7 +36,7 @@
 
   
   <p>
-    <label for="id_journal_doi">Journal doi:</label>
+    <label for="id_journal_doi">Journal ISSN:</label>
     <input type="number" name="journal_doi" id="id_journal_doi" placeholder="Enter DOI">
     
     
@@ -49,7 +58,8 @@
       
     
   </p>
-        <input type="submit" value="submit">
+        <input class="btn btn-success" type="submit" value="submit">
     </form>
 </div>
 </body>
+{% endblock %}

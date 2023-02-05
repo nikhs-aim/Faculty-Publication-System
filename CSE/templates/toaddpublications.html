@@ -1,8 +1,23 @@
-<body style="background-color:moccasin;">
-<h3>Add Publications</h3>
-<hr>
+{%  extends 'main.html' %}
+{% block content %}
+<body >
+    <body>
+        <style>
+            h3 {
+              font-family: 'Britannic Bold', sans-serif;
+            }
+            
+        </style>
+<h3 align="center">Add Publications</h3>
+<hr color="black" size="5">
+
 To add your published conferences and journals, you have to login to your account.<br><br>
 
-<button style="margin: 10px;"><a href="/">Go back</a></button>
-<button style="margin: 10px;"><a href="{% url 'login' %}">Login</a></button>
+<button style="margin: 10px;" type="button" class="btn btn-dark" ><a href="/">Go back</a></button>
+  
+<form action="{% url 'login' %}" method="get">
+  Login To your Account <input class="btn btn-success" type="submit" value="Login" >
+</form>
+
 </body>
+{% endblock %}

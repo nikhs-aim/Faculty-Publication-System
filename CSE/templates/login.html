@@ -1,17 +1,27 @@
-<body style="background-color:moccasin;">
-<h1>Login</h1>
-<hr>
+{%  extends 'main.html' %}
+{% block content %}
+<body style="text-align:center;">
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 >Login</h1>
+<hr color="black" size="5">
     <form method="post" autocomplete="off">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="Login"><br><br>
-        Don't have an account ? <br>
-        Click here to register:<button><a href="{% url 'register' %}">Register</a></button><br><br>
-        
+        <input style="margin: 10px;" class="btn btn-dark"type="submit" value="Login"><br><br>
     </form>
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
+    <form action="{% url 'register' %}" method="get">
+        Don't have an account ? 
+        Click here to register: <input class="btn btn-success" type="submit" value="Register" >
+      </form>
 
-To go back to home:<button><a href="/">Click here</a></button>
+To go back to home:<button style="margin: 5px;" type="button" class="btn btn-dark" ><a href="/">Click here</a></button>
 </body>
+{% endblock %}

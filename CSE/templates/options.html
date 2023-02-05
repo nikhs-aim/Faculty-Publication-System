@@ -1,7 +1,29 @@
-<body style="background-color:moccasin;">
-<h1>View your Publications Here!</h1>
-<hr>
-<b>Published Conferences:</b><button><a href="{% url 'conferences' %}">Cick Here</a></button><br><br>
-<b>Published Journals:</b><button><a href="{% url 'journals' %}">Click Here</a></button><br><br>
-<button><a href="{% url 'post_details' %}">Go Back</a></button>
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
+
+<body style="text-align:center;">
+<h1>Your Publications</h1>
+
+<hr color="black" size="5">
+<form action="{% url 'conferences' %}" method="get">
+    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Published Conferences" >
+</form><br><br>
+<form action="{% url 'journals' %}" method="get">
+    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Published Journals" >
+</form>
+<br>
+<button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'post_details' %}">Go Back</a></button>
 </body>
+{% endblock %}
+
+
+
+
+
+

@@ -1,18 +1,43 @@
-<body style="background-color:moccasin;">
-<h1>Faculty Conference List</h1>
-<hr>
-<button style="margin: 10px;"><a href="{% url 'hodoptions' %}">Go back</a></button>
-<button style="margin: 10px;"><a href="{% url 'searchfacpublications' %}">Search</a></button>
-<table border="5">
-    <thead>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 align="center">Faculty Conference List</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'hodoptions' %}">Go back <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form action="{% url 'searchfacpublications' %}" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="cc" value="{{ request.GET.cc }}" placeholder="Enter faculty name">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Conference">
+    </form>
+    </div>
+  </nav>
+<br>
+
+
+
+
+
+<table class="table">
+    <thead class="thead-light">
         <tr>
             
-            <th>Faculty</th>
-            <th>Conference name</th>
-            <th>Conference ID</th>
-            <th>Conference doi</th>
-            <th>Ugc list</th>
-            <th>Conference article</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Conference name</th>
+            <th scope="col">Conference ID</th>
+            <th scope="col">Conference doi</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Conference article PDF</th>
+           
         </tr>
     </thead>
     <tbody>
@@ -26,15 +51,25 @@
                 <td>{{i.conference_id}}</td>
                 <td>{{i.conference_doi}}</td>
                 <td>{{ i.ugc_listed }}</td>
+
                 <td>
                     {% if i.conference_article %}
-                      <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
-                      <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    <div class="d-flex">
+                      <div style="margin-right: 10px;">
+                        <form action="{{ i.conference_article.url }}" method="get" target="_blank">
+                          <input class="btn btn-info" type="submit" value="View PDF">
+                        </form>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                      </div>
+                    </div>
                     {% endif %}
-                </td>
+                  </td>
+                  
+                  
             </tr>
         {% endfor %}
     </tbody>
 </table
-
-</body>
+{% endblock %}

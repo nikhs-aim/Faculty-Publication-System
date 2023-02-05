@@ -1,13 +1,27 @@
-<body style="background-color:moccasin;">
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
+
+
+<body>
 <div align="center">
     <h1>Delete Post</h1>
-    <hr>
+    <hr color="black" size="5">
     <p>Are you sure you want to delete the following post?</p>
-    <p>Post Title: {{ object.post_title}}</p>
+    <p>Post Title: <b>{{ object.post_title}}</b></p>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" value="Confirm">
+        <input class="btn btn-danger" type="submit" value="Confirm">
+    </form><br>
+    <form action="{% url 'mypost_details' %}" method="get">
+        <input class="btn btn-success" type="submit" value="Cancel">
     </form>
-    <button><a href="{% url 'mypost_details' %}">Cancel</a></button>
+  
 </div>
 </body>
+{% endblock %}

@@ -1,30 +1,38 @@
-<body style="background-color:moccasin;">
-<h1 align="center">Search Events</h1><hr>
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+  h1 {
+    font-family: 'Britannic Bold', sans-serif;
+  }
+  h5{
+    font-family: 'ariel', sans-serif;
+  }
+</style>
+<body >
+<h1 align="center">Search Events</h1>
+<hr color="black" size="5">
+
 
 {% if user.is_authenticated %}
-  <button><a href="{% url 'event-details' %}">Go back</a></button><br><br>
+  <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'event-details' %}">Go back</a></button><br><br>
 {% else %}
-  <button><a href="{% url 'before_login_event_details' %}">Go back</a></button><br><br>
+  <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'before_login_event_details' %}">Go back</a></button><br><br>
 {% endif %}
 
-<form action="{% url 'searchevents' %}" method="get">
-    <input type="text" name="e" value="{{ request.GET.e }}" placeholder="Enter faculty name or Event name">
-    <input type="submit" name="submit" value="Search">
-  </form>
-  
+
 
   {% if submit %}
-    <h3>Search results for "{{ request.GET.e }}"</h3>
+    <h5>Search results for "{{ request.GET.e }}"</h5>
     {% if results %}
-      <table border="5">
-        <thead>
+      <table class="table">
+        <thead class="thead-light">
           <tr>
-            <th>Faculty</th>
-            <th>Event Name</th>
-            <th>Details</th>
-            <th>Location</th>
-            <th>Event Date and Time</th>
-            <th>Posted Time</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Details</th>
+            <th scope="col">Location</th>
+            <th scope="col">Event Date and Time</th>
+            <th scope="col">Posted Time</th>
           </tr>
         </thead>
         <tbody>
@@ -35,13 +43,17 @@
                 {% if user.is_authenticated %}
                 <td>{{ i.event_details }}</td>
                 {% else %}
-                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                <td><form action="{% url 'login' %}" method="get">
+                  <input class="btn btn-success" type="submit" value="Login" >
+                </form></td>
                 {% endif %}
                 <td>{{ i.event_Location }}</td>
                 {% if user.is_authenticated %}
                 <td>{{ i.event_Date }}</td>
                 {% else %}
-                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                <td><form action="{% url 'login' %}" method="get">
+                  <input class="btn btn-success" type="submit" value="Login" >
+                </form></td>
                 {% endif %}
                 <td>{{i.post_event}}</td>
                 
@@ -54,3 +66,4 @@
     {% endif %}
   {% endif %}
 </body>
+{% endblock %}

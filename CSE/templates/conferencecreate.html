@@ -1,11 +1,20 @@
-<body style="background-color:moccasin;">
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+
 <html>
 <head></head>
 <body>
     <div align="center">
     <h1>Conference form</h1>
-    <hr>
-    <button><a href="/conferences/">Go back</a></button>
+    <hr color="black" size="5">
+    <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="/conferences/">Go back</a></button>
     <form method="post" action="" autocomplete="off" enctype="multipart/form-data" style="text-align:left; margin:auto; width:50%">
         {% csrf_token %}
     <p>
@@ -42,9 +51,10 @@
     </p>
     
     
-    <input type="submit" value="submit">
+    <input class="btn btn-success" type="submit" value="submit">
     </form>
     </div>
 </body>
 </html>
 </body>
+{% endblock %}

@@ -1,23 +1,47 @@
-<body style="background-color:moccasin;">
-<h1>My Journal List</h1>
-<hr>
-{% if user.role == "HOD" %}
-<button style="margin: 10px;"><a href="{% url 'options' %}">Go back</a></button>
-{% else %}
-<button style="margin: 10px;"><a href="{% url 'otheroptions' %}">Go back</a></button>
-{% endif %}
-<button style="margin: 10px;"><a href="{% url 'journ-create' %}">Add Journal</a></button>
-<button style="margin: 10px;"><a href="{% url 'searchjpublications' %}">Search</a></button>
-<table border="5">
-    <thead>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 align="center">My Journal List</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if user.role == "HOD" %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'options' %}">Go back <span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'otheroptions' %}">Go back <span class="sr-only">(current)</span></a>
+          </li>
+          {% endif %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'journ-create' %}">Add Journal <span class="sr-only">(current)</span></a>
+          </li>
+
+      </ul>
+      <form action="{% url 'searchjpublications' %}"method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="j" value="{{ request.GET.j }}" placeholder="Enter Journal name">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Journal">
+    </form>
+    </div>
+  </nav>
+
+<table class="table">
+    <thead class="thead-light">
         <tr>
-            <th>Journal name</th>
-            <th>Journal ID</th>
-            <th>Journal doi</th>
-            <th>Ugc list</th>
-            <th>Journal article</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th scope="col">Journal name</th>
+            <th scope="col">Journal ID</th>
+            <th scope="col">Journal ISSN</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Journal article</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -29,22 +53,32 @@
                 <td>{{ i.ugc_listed }}</td>
                 <td>
                     {% if i.journal_article %}
-                      <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
-                      <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    <div class="d-flex">
+                      <div style="margin-right: 10px;">
+                        <form action="{{ i.journal_article.url }}" method="get" target="_blank">
+                          <input class="btn btn-info" type="submit" value="View PDF">
+                        </form>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                      </div>
+                    </div>
                     {% endif %}
-                </td>
-                <td>
+                  </td>
+                  <td>
                     <form action="{% url 'journal_update' i.pk %}" method="get">
-                        <input type="submit" value="Update">
+                        <input class="btn btn-primary" type="submit" value="Update">
                     </form>
                 </td>
                 <td>
-                    <button><a href="{% url 'journal_delete' i.pk %}">Delete</a></button>
+                    <form action="{% url 'journal_delete' i.pk %}" method="get">
+                        <input class="btn btn-danger" type="submit" value="Delete" >
+                    </form>
+                
                 </td>
                 
             </tr>
         {% endfor %}
     </tbody>
 </table
-
-</body>
+{% endblock %}

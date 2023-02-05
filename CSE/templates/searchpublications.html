@@ -1,29 +1,36 @@
-<body style="background-color:moccasin;">
-    <h1 align="center">Search your Publications</h1><hr>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+
+    <h1 align="center">Search your Publications</h1>
+    <hr color="black" size="5">
     
     
-      <button><a href="{% url 'conferences' %}">Go back</a></button><br><br>
+      <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'conferences' %}">Go back</a></button><br><br>
     
     
-    <form action="{% url 'searchpublications' %}" method="get">
-        <input type="text" name="c" value="{{ request.GET.c }}" placeholder="Enter conference name">
-        <input type="submit" name="submit" value="Search ">
-      </form>
+
       
     
     {% if submit %}
-    <h3>Search results for "{{ request.GET.c }}"</h3>
+    <h5>Search results for "{{ request.GET.c }}"</h5>
     {% if results %}
-      <table border="5">
-        <thead>
+      <table class="table">
+        <thead class="thead-light">
           <tr>
-            <th>Conference name</th>
-            <th>Conference ID</th>
-            <th>Conference doi</th>
-            <th>Ugc list</th>
-            <th>Conference article</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th scope="col">Conference name</th>
+            <th scope="col">Conference ID</th>
+            <th scope="col">Conference doi</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Conference article PDF</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -34,19 +41,31 @@
               <td>{{i.conference_doi}}</td>
               <td>{{ i.ugc_listed }}</td>
               <td>
-                  {% if i.conference_article %}
-                    <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
-                    <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
-                  {% endif %}
+                {% if i.conference_article %}
+                <div class="d-flex">
+                  <div style="margin-right: 10px;">
+                    <form action="{{ i.conference_article.url }}" method="get" target="_blank">
+                      <input class="btn btn-info" type="submit" value="View PDF">
+                    </form>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-outline-primary"><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                  </div>
+                </div>
+                {% endif %}
               </td>
               <td>
-                  <form action="{% url 'conference_update' i.pk %}" method="get">
-                      <input type="submit" value="Update">
-                  </form>
-              </td>
-              <td>
-                  <button><a href="{% url 'conference_delete' i.pk %}">Delete</a></button>
-              </td>
+                <form action="{% url 'conference_update' i.pk %}" method="get">
+                  <input class="btn btn-primary" type="submit" value="Update">
+              </form>
+          </td>
+          <td>
+              <form action="{% url 'conference_delete' i.pk %}" method="get">
+                  <input class="btn btn-danger" type="submit" value="Delete" >
+              </form>
+          
+          </td>
+          
               
           </tr>
       {% endfor %}
@@ -57,3 +76,4 @@
     {% endif %}
   {% endif %}
 </body>
+{% endblock %}

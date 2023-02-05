@@ -1,13 +1,30 @@
-<body style="background-color:moccasin;">
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
+
+
+
+
+
+<body>
 <div align="center">
     <h1>Delete Journal</h1>
     <hr>
     <p>Are you sure you want to delete the following journal?</p>
-    <p>Journal Name: {{ object.journal_name }}</p>
+    <p>Journal Name: <b>{{ object.journal_name }}</b></p>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" value="Confirm">
+        <input class="btn btn-danger" type="submit" value="Confirm">
+    </form><br>
+    <form action="{% url 'journals' %}" method="get">
+        <input class="btn btn-success" type="submit" value="Cancel">
     </form>
-    <button><a href="{% url 'journals' %}">Cancel</a></button>
+
 </div>
 </body>
+{% endblock %}

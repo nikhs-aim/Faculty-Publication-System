@@ -1,29 +1,40 @@
-<body style="background-color:moccasin;">
-    <h1 align="center">Search your Publications</h1><hr>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+
+    
+   
+
+
+<body >
+    <h1 align="center">Search your Publications</h1>
+    <hr color="black" size="5">
+    
+      <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'journals' %}">Go back</a></button><br><br>
     
     
-      <button><a href="{% url 'journals' %}">Go back</a></button><br><br>
-    
-    
-    <form action="{% url 'searchjpublications' %}" method="get">
-        <input type="text" name="j" value="{{ request.GET.j }}" placeholder="Enter journal name">
-        <input type="submit" name="submit" value="Search ">
-      </form>
+
       
     
     {% if submit %}
     <h3>Search results for "{{ request.GET.j }}"</h3>
     {% if results %}
-      <table border="5">
-        <thead>
+      <table class="table">
+        <thead class="thead-light">
           <tr>
-            <th>Journal name</th>
-            <th>Journal ID</th>
-            <th>Journal doi</th>
-            <th>Ugc list</th>
-            <th>Journal article</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th scope="col">Journal name</th>
+            <th scope="col">Journal ID</th>
+            <th scope="col">Journal doi</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Journal article</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -33,20 +44,31 @@
             <td>{{i.journal_id}}</td>
             <td>{{i.journal_doi}}</td>
             <td>{{ i.ugc_listed }}</td>
-            <td>
+           <td>
                 {% if i.journal_article %}
-                  <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
-                  <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                <div class="d-flex">
+                  <div style="margin-right: 10px;">
+                    <form action="{{ i.journal_article.url }}" method="get" target="_blank">
+                      <input class="btn btn-info" type="submit" value="View PDF">
+                    </form>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-outline-primary"><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                  </div>
+                </div>
                 {% endif %}
-            </td>
-            <td>
+              </td>
+              <td>
                 <form action="{% url 'journal_update' i.pk %}" method="get">
-                    <input type="submit" value="Update">
-                </form>
-            </td>
-            <td>
-                <button><a href="{% url 'journal_delete' i.pk %}">Delete</a></button>
-            </td>
+                  <input class="btn btn-primary" type="submit" value="Update">
+              </form>
+          </td>
+          <td>
+              <form action="{% url 'journal_delete' i.pk %}" method="get">
+                  <input class="btn btn-danger" type="submit" value="Delete" >
+              </form>
+          
+          </td>
           </tr>
       {% endfor %}
         </tbody>
@@ -56,3 +78,4 @@
     {% endif %}
   {% endif %}
 </body>
+{% endblock %}

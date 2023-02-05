@@ -1,10 +1,21 @@
-<body style="background-color:moccasin;">
+{%  extends 'main.html' %}
+{% block content %}<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+
+
+<body>
 <h1>Post Update</h1>
-<hr>
-<button><a href="{% url 'mypost_details' %}">Go back</a></button>
+<hr color="black" size="5">
+<button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'mypost_details' %}">Go back</a></button>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update Post">
+    <input class="btn btn-success" type="submit" value="Update Post">
 </form>
 </body>
+{% endblock %}

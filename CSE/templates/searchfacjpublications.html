@@ -1,28 +1,39 @@
-<body style="background-color:moccasin;">
-    <h1 align="center">Search Faculty Journal Publications</h1><hr>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+
+<body>
+    <h1 align="center">Search Faculty Journal Publications</h1>
+    <hr color="black" size="5">
     
     
-      <button><a href="{% url 'hodviewotherjourn' %}">Go back</a></button><br><br>
+      <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'hodviewotherjourn' %}">Go back</a></button><br><br>
     
     
-    <form action="{% url 'searchfacjpublications' %}" method="get">
-        <input type="text" name="jj" value="{{ request.GET.jj }}" placeholder="Enter Faculty name">
-        <input type="submit" name="submit" value="Search ">
-      </form>
+
+   
+    
+
       
     
     {% if submit %}
     <h3>Search results for "{{ request.GET.jj }}"</h3>
     {% if results %}
-      <table border="5">
-        <thead>
+      <table class="table">
+        <thead class="thead-light">
           <tr>
-            <th>Faculty</th>
-            <th>Journal name</th>
-            <th>Journal ID</th>
-            <th>Journal doi</th>
-            <th>Ugc list</th>
-            <th>Journal article</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Journal name</th>
+            <th scope="col">Journal ID</th>
+            <th scope="col">Journal doi</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Journal article</th>
           </tr>
         </thead>
         <tbody>
@@ -35,11 +46,19 @@
             <td>{{i.journal_doi}}</td>
             <td>{{ i.ugc_listed }}</td>
             <td>
-                {% if i.journal_article %}
-                  <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
-                  <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
-                {% endif %}
-            </td>
+            {% if i.journal_article %}
+                    <div class="d-flex">
+                      <div style="margin-right: 10px;">
+                        <form action="{{ i.journal_article.url }}" method="get" target="_blank">
+                          <input class="btn btn-info" type="submit" value="View PDF">
+                        </form>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </td>
          </tr>
       {% endfor %}
         </tbody>
@@ -49,3 +68,4 @@
     {% endif %}
   {% endif %}
 </body>
+{% endblock %}

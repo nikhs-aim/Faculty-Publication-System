@@ -1,23 +1,51 @@
-<body style="background-color:moccasin;">
-<h1>My Conference List</h1>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 align="center">My Conference List</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if user.role == "HOD" %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'options' %}">Go back <span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'otheroptions' %}">Go back <span class="sr-only">(current)</span></a>
+          </li>
+        {% endif %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'conf-create' %}">Add Conference <span class="sr-only">(current)</span></a>
+          </li>
+
+      </ul>
+      <form action="{% url 'searchpublications' %}"method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="c" value="{{ request.GET.c }}" placeholder="Enter Conference name">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Conference">
+    </form>
+    </div>
+  </nav>
+<br>
+<h1></h1>
 <hr>
-{% if user.role == "HOD" %}
-<button style="margin: 10px;"><a href="{% url 'options' %}">Go back</a></button>
-{% else %}
-<button style="margin: 10px;"><a href="{% url 'otheroptions' %}">Go back</a></button>
-{% endif %}
-<button style="margin: 10px;"><a href="{% url 'conf-create' %}">Add Conference</a></button>
-<button style="margin: 10px;"><a href="{% url 'searchpublications' %}">Search</a></button>
-<table border="5">
-    <thead>
+
+
+<table class="table">
+    <thead class="thead-light">
         <tr>
-            <th>Conference name</th>
-            <th>Conference ID</th>
-            <th>Conference doi</th>
-            <th>Ugc list</th>
-            <th>Conference article</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th scope="col">Conference name</th>
+            <th scope="col">Conference ID</th>
+            <th scope="col">Conference doi</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Conference article PDF</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -29,22 +57,33 @@
                 <td>{{ i.ugc_listed }}</td>
                 <td>
                     {% if i.conference_article %}
-                      <button><a href="{{ i.conference_article.url }}" target="_blank" >View PDF</a></button>
-                      <button><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    <div class="d-flex">
+                      <div style="margin-right: 10px;">
+                        <form action="{{ i.conference_article.url }}" method="get" target="_blank">
+                          <input class="btn btn-info" type="submit" value="View PDF">
+                        </form>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                      </div>
+                    </div>
                     {% endif %}
-                </td>
-                <td>
+                  </td>
+                  <td>
                     <form action="{% url 'conference_update' i.pk %}" method="get">
-                        <input type="submit" value="Update">
+                        <input class="btn btn-primary" type="submit" value="Update">
                     </form>
                 </td>
                 <td>
-                    <button><a href="{% url 'conference_delete' i.pk %}">Delete</a></button>
+                    <form action="{% url 'conference_delete' i.pk %}" method="get">
+                        <input class="btn btn-danger" type="submit" value="Delete" >
+                    </form>
+                
                 </td>
+                
                 
             </tr>
         {% endfor %}
     </tbody>
 </table
-
-</body>
+{% endblock %}

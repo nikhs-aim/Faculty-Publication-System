@@ -1,18 +1,40 @@
-<body style="background-color:moccasin;">
-<h1>Faculty Journal List</h1>
-<hr>
-<button style="margin: 10px;"><a href="{% url 'hodoptions' %}">Go back</a></button>
-<button style="margin: 10px;"><a href="{% url 'searchfacjpublications' %}">Search</a></button>
-<table border="5">
-    <thead>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 align="center">Faculty Journal List</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'hodoptions' %}">Go back <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form action="{% url 'searchfacjpublications' %}" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="jj" value="{{ request.GET.jj }}" placeholder="Enter faculty name">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Journal">
+    </form>
+    </div>
+  </nav>
+<br>
+
+
+<br>
+<table class="table">
+    <thead class="thead-light">
         <tr>
             
-               <th>Faculty</th>
-            <th>Journal name</th>
-            <th>Journal ID</th>
-            <th>Journal doi</th>
-            <th>Ugc list</th>
-            <th>Journal article</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Journal name</th>
+            <th scope="col">Journal ID</th>
+            <th scope="col">Journal doi</th>
+            <th scope="col">Ugc list</th>
+            <th scope="col">Journal article PDF</th>
         </tr>
     </thead>
     <tbody>
@@ -27,13 +49,22 @@
                 <td>{{ i.ugc_listed }}</td>
                 <td>
                     {% if i.journal_article %}
-                      <button><a href="{{ i.journal_article.url }}" target="_blank" >View PDF</a></button>
-                      <button><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                    <div class="d-flex">
+                      <div style="margin-right: 10px;">
+                        <form action="{{ i.journal_article.url }}" method="get" target="_blank">
+                          <input class="btn btn-info" type="submit" value="View PDF">
+                        </form>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{ i.journal_article.url }}" target="_blank" download>Downoad PDF</a></button>
+                      </div>
+                    </div>
                     {% endif %}
-                </td>
+                  </td>
+                  
             </tr>
         {% endfor %}
     </tbody>
 </table
 
-</body>
+{% endblock %}

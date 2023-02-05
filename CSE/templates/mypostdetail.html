@@ -1,21 +1,43 @@
-<body style="background-color:moccasin;">
-<h1>Your Posts</h1>
-<hr>
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
+<body >
+
+<h1 align="center">Your Posts</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'post_details' %}">Go back <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form action="{% url 'searchyourposts' %}" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="qq" value="{{ request.GET.qq }}" placeholder="Enter post title">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Posts">
+    </form>
+    </div>
+  </nav>
+<br>
 
 
-<button><a href="{% url 'post_details' %}">Go back</a></button><br><br>
 
-<table border="5">
-    <thead>
+
+<table class="table">
+    <thead class="thead-light">
         <tr>
             
-            <th>Title</th>
-            <th>Details</th>
-            <th>Category</th>
-            <th>Snap</th>
-            <th>Time</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th scope="col">Title</th>
+            <th scope="col">Details</th>
+            <th scope="col">Category</th>
+            <th scope="col">Snap</th>
+            <th scope="col">Time</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -27,16 +49,24 @@
                 <td>{{ post.post_category }}</td>
                 <td><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></td>
                 <td>{{ post.post_time }}</td>
-                <td>
-                    <form action="{% url 'update_post' post.id %}" method="get">
-                        <input type="submit" value="Update">
-                    </form>
-                </td>
-                <td>
-                    <button><a href="{% url 'post_delete' post.id %}">Delete</a></button>
-                </td>
+            </td>
+            <td>
+              <form action="{% url 'update_post' post.id %}" method="get">
+                  <input class="btn btn-primary" type="submit" value="Update">
+              </form>
+          </td>
+          <td>
+              <form action="{% url 'post_delete' post.id %}" method="get">
+                  <input class="btn btn-danger" type="submit" value="Delete" >
+              </form>
+          
+          </td>
+                
+                
+            
             </tr>
         {% endfor %}
     </tbody>
 </table>
 </body>
+{% endblock %}

@@ -1,19 +1,48 @@
-<body style="background-color:moccasin;">
-<h1>Event Details</h1>
-<hr>
-To see details about the event, login to your account<button><a href="{% url 'login' %}">Login</a></button><br><br>
-Don't have an account? Register here <button><a href="{% url 'register' %}">Register</a></button><br><br>
-<button style="margin: 5px;"><a href="{% url 'searchevents' %}">Search</a></button>
-<button style="margin: 5px;"><a href="/">Go back</a></button><br><br>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 align="center">Event Details</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Go back <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only">(current)</span></a>
+          </li>
+      </ul>
+      <form action="{% url 'searchevents' %}" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="e" value="{{ request.GET.e }}" placeholder="Enter faculty/event name">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Events">
+    </form>
+    </div>
+  </nav>
+<br>
+
+To see details about the event, login to your account.
+
+<br>
 
 
-<table border="5">
-    <thead>
+<br>
+<table class="table">
+    <thead class="thead-light">
         <tr>
-            <th>Faculty</th>
-            <th>Event Name</th>
-            <th>Location</th>
-            <th>Posted Time</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Posted Time</th>
         </tr>
     </thead>
     <tbody>
@@ -28,3 +57,4 @@ Don't have an account? Register here <button><a href="{% url 'register' %}">Regi
     </tbody>
 </table>
 </body>
+{% endblock %}

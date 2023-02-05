@@ -56,7 +56,7 @@ ROOT_URLCONF = 'FPS3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates','static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,3 +129,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login/'
+
+STATICFILES_DIRS=[BASE_DIR/'templates']
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')

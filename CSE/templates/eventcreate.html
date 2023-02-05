@@ -1,12 +1,20 @@
-<body style="background-color:moccasin;">
-<h1>Event Form</h1><hr>
-<button><a href="{% url 'event-details' %}">Go Back</a></button>
-
-
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
+<body >
+<h1 >Event Form</h1>
+<hr color="black" size="5">
+<button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'event-details' %}">Go Back</a></button>
 
     <form method="post"  >
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create event">
+        <input style="margin: 5px;"class="btn btn-success" type="submit" value="Create event">
     </form>
 </body>
+{% endblock %}

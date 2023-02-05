@@ -1,21 +1,46 @@
-<body style="background-color:moccasin;">
-<h1>Event Details</h1>
-<hr>
 
-<button style="margin: 10px;"><a href="{% url 'post_details' %}">Go back</a></button>
-<button style="margin: 10px;"><a href="{% url 'event-create' %}">Add Event</a></button>
-<button style="margin: 10px;"><a href="{% url 'searchevents' %}">Search</a></button>
-<button style="margin: 10px;"><a href="{% url 'myevent_details' %}">Edit</a></button>
+{%  extends 'main.html' %}
+{% block content %}
+<body>
+    <style>
+        h1 {
+          font-family: 'Britannic Bold', sans-serif;
+        }
+        
+      </style>
+<h1 align="center">Event Details</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'post_details' %}">Go back <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'event-create' %}">Add event <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'myevent_details' %}">Edit Event<span class="sr-only">(current)</span></a>
+          </li>
+      </ul>
+      <form action="{% url 'searchevents' %}" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="e" value="{{ request.GET.e }}" placeholder="Enter faculty/event name">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Events">
+    </form>
+    </div>
+  </nav>
+<br>
 
-<table border="5">
-    <thead>
+
+<table class="table">
+    <thead class="thead-light">
         <tr>
-            <th>Faculty</th>
-            <th>Event Name</th>
-            <th>Details</th>
-            <th>Location</th>
-            <th>Event Date and Time</th>
-            <th>Posted Time</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Details</th>
+            <th scope="col">Location</th>
+            <th scope="col">Event Timings</th>
+            <th scope="col">Posted Time</th>
         </tr>
     </thead>
     <tbody>
@@ -32,3 +57,4 @@
     </tbody>
 </table>
 </body>
+{% endblock %}

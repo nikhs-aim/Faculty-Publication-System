@@ -1,11 +1,23 @@
-<body style="background-color:moccasin;">
-<h1>Create a new post</h1>
-<button><a href="{% url 'post_details' %}">Go Back</a></button>
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
 
-<hr>
+
+<body>
+<h1>Create a new post</h1>
+<hr color="black" size="5">
+<button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'post_details' %}">Go Back</a></button>
+
+
     <form method="post" enctype="multipart/form-data" >
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create post">
+        <input class="btn btn-success" type="submit" value="Create post">
     </form>
 </body>
+{% endblock %}

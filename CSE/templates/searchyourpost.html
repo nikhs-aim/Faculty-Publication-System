@@ -1,0 +1,74 @@
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+  h1 {
+    font-family: 'Britannic Bold', sans-serif;
+  }
+  h5{
+    font-family: 'ariel', sans-serif;
+  }
+</style>
+
+<h1 align="center">Search Posts</h1>
+<hr color="black" size="5">
+
+  <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'mypost_details' %}">Go back</a></button><br><br>
+
+
+
+  
+
+  {% if submit %}
+    <h5>Search results for "{{ request.GET.qq }}"</h5>
+    {% if results %}
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Faculty</th>
+            <th scope="col">Title</th>
+            <th scope="col">Details</th>
+            <th scope="col">Category</th>
+            <th scope="col">Snap</th>
+            <th scope="col">Time</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in results %}
+            <tr>
+                <td>{{ post.fac_id.username }}</td>
+                <td>{{ post.post_title }}</td>
+                {% if user.is_authenticated %}
+                <td>{{ post.post_details }}</td>
+                {% else %}
+                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                {% endif %}
+                <td>{{ post.post_category }}</td>
+                <td><a href="{{ post.post_snap.url }}" target="_blank"><img style="max-width: 100px;" src="{{ post.post_snap.url }}" alt="Post Image"></a></td>
+                {% if user.is_authenticated %}
+                <td>{{ post.post_time }}</td>
+                {% else %}
+                <td><button style="margin: 5px;"><a href="{% url 'login' %}">Login</a></button></td>
+                {% endif %}
+                <td>
+                  <form action="{% url 'update_post' post.id %}" method="get">
+                      <input class="btn btn-primary" type="submit" value="Update">
+                  </form>
+              </td>
+              <td>
+                  <form action="{% url 'post_delete' post.id %}" method="get">
+                      <input class="btn btn-danger" type="submit" value="Delete" >
+                  </form>
+              
+              </td>
+                    
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

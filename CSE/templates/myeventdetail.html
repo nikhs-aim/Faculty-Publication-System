@@ -1,20 +1,28 @@
-<body style="background-color:moccasin;">
-<h1>Event Details</h1>
-<hr>
+{%  extends 'main.html' %}
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Britannic Bold', sans-serif;
+    }
+    
+  </style>
+<body >
+<h1 align="center">Edit Event</h1>
+<hr color="black" size="5">
 
 
-<button><a href="{% url 'event-details' %}">Go back</a></button><br><br>
+<button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'event-details' %}">Go back</a></button><br><br>
 
-<table border="5">
-    <thead>
+<table class="table">
+    <thead class="thead-light">
         <tr>
-            <th>Event Name</th>
-            <th>Details</th>
-            <th>Location</th>
-            <th>Event Date and Time</th>
-            <th>Posted Time</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Details</th>
+            <th scope="col">Location</th>
+            <th scope="col">Event Date and Time</th>
+            <th scope="col">Posted Time</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -27,14 +35,18 @@
                 <td>{{i.post_event}}</td>
                 <td>
                     <form action="{% url 'update_event' i.id %}" method="get">
-                        <input type="submit" value="Update">
+                        <input class="btn btn-primary" type="submit" value="Update">
                     </form>
                 </td>
                 <td>
-                    <button><a href="{% url 'event_delete' i.id %}">Delete</a></button>
+                    <form action="{% url 'event_delete' i.id %}" method="get">
+                        <input class="btn btn-danger" type="submit" value="Delete" >
+                    </form>
+                
                 </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 </body>
+{% endblock %}

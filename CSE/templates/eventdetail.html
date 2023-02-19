@@ -1,36 +1,42 @@
-
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
+           }
         
-      </style>
+    </style>
 <h1 align="center">Event Details</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+    
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'post_details' %}">Go back <span class="sr-only">(current)</span></a>
         </li>
         
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'event-create' %}">Add event <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
+        </li>
+        
+        <li class="nav-item active">
             <a class="nav-link" href="{% url 'myevent_details' %}">Edit Event<span class="sr-only">(current)</span></a>
-          </li>
+        </li>
+      
       </ul>
+      
       <form action="{% url 'searchevents' %}" method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="e" value="{{ request.GET.e }}" placeholder="Enter faculty/event name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Events">
-    </form>
+      </form>
     </div>
-  </nav>
-<br>
+  
+</nav>
 
+<br>
 
 <table class="table">
     <thead class="thead-light">
@@ -56,5 +62,7 @@
         {% endfor %}
     </tbody>
 </table>
+
 </body>
+
 {% endblock %}

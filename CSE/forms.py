@@ -1,4 +1,4 @@
-from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 from .models import Faculty
 from django import forms

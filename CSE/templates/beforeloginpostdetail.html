@@ -1,9 +1,11 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <style>
     h2 {
       font-family: 'Arial black', sans-serif;
-    }
+       }
 </style>
   
 
@@ -14,33 +16,32 @@
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'before_login_event_details' %}">Events <span class="sr-only">(current)</span></a>
         </li>
+   
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'to_add_publications' %}">Add Publications <span class="sr-only">(current)</span></a>
-          </li>
+        </li>
+ 
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
+        </li>
+        
+        <li class="nav-item active">
             <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only">(current)</span></a>
-          </li>
+        </li>
       </ul>
+      
       <form action="{% url 'searchposts' %}" method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="q" value="{{ request.GET.q }}" placeholder="Enter faculty name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Posts">
-    </form>
-    </div>
-  </nav>
+      </form>
 
-<body>
+    </div>
+</nav>
 
 <br>
 
 <h3>Faculty Posts</h3>
 To see details about the post, login to your account<br><hr>
-
-
-  
-
 <br> 
 
 <table class="table" >
@@ -64,6 +65,7 @@ To see details about the post, login to your account<br><hr>
         {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}
 
 

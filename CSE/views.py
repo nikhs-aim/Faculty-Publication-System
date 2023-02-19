@@ -5,7 +5,6 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
 from .forms import PostForm, RegistrationForm
 from django.views.generic.edit import UpdateView
 from django.http import HttpResponseRedirect
@@ -257,7 +256,7 @@ class EventDeleteView(DeleteView):
 
 def search_post(request):
     if request.method == 'GET':
-        query = request.GET.get('q')
+        query = request.GET.get('q')      # q -parameter used to pass the search query entered by the user. 
         submit = request.GET.get('submit')
 
         if query:

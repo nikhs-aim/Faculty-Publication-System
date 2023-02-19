@@ -1,16 +1,20 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
+           }
         
-      </style>
+    </style>
+    
 <h1 align="center">Event Details</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+
         <li class="nav-item active">
           <a class="nav-link" href="/">Go back <span class="sr-only">(current)</span></a>
         </li>
@@ -18,24 +22,25 @@
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
           </li>
+
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only">(current)</span></a>
           </li>
       </ul>
+
       <form action="{% url 'searchevents' %}" method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="e" value="{{ request.GET.e }}" placeholder="Enter faculty/event name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Events">
-    </form>
+      </form>
+
     </div>
-  </nav>
-<br>
+</nav>
 
+<br>
 To see details about the event, login to your account.
-
+<br>
 <br>
 
-
-<br>
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -57,4 +62,5 @@ To see details about the event, login to your account.
     </tbody>
 </table>
 </body>
+
 {% endblock %}

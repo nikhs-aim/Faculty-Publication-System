@@ -1,16 +1,20 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
+           }
         
-      </style>
+    </style>
+
 <h1 align="center">My Conference List</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+
         {% if user.role == "HOD" %}
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'options' %}">Go back <span class="sr-only">(current)</span></a>
@@ -18,23 +22,24 @@
         {% else %}
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'otheroptions' %}">Go back <span class="sr-only">(current)</span></a>
-          </li>
+        </li>
         {% endif %}
+
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'conf-create' %}">Add Conference <span class="sr-only">(current)</span></a>
-          </li>
+        </li>
 
       </ul>
+
       <form action="{% url 'searchpublications' %}"method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="c" value="{{ request.GET.c }}" placeholder="Enter Conference name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Conference">
-    </form>
+      </form>
+
     </div>
   </nav>
-<br>
-<h1></h1>
-<hr>
 
+<br>
 
 <table class="table">
     <thead class="thead-light">
@@ -63,27 +68,30 @@
                           <input class="btn btn-info" type="submit" value="View PDF">
                         </form>
                       </div>
+                      
                       <div>
                         <button type="button" class="btn btn-outline-primary"><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
                       </div>
                     </div>
                     {% endif %}
-                  </td>
-                  <td>
+                </td>
+
+                <td>
                     <form action="{% url 'conference_update' i.pk %}" method="get">
                         <input class="btn btn-primary" type="submit" value="Update">
                     </form>
                 </td>
+
                 <td>
                     <form action="{% url 'conference_delete' i.pk %}" method="get">
                         <input class="btn btn-danger" type="submit" value="Delete" >
                     </form>
-                
                 </td>
-                
-                
+      
             </tr>
         {% endfor %}
+
     </tbody>
-</table
+</table>
+
 {% endblock %}

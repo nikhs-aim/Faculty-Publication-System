@@ -1,11 +1,12 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <style>
     h1 {
       font-family: 'Britannic Bold', sans-serif;
-    }
-    
-  </style>
+       }
+</style>
 
 
 
@@ -15,15 +16,17 @@
     <hr color="black" size="5">
     <p>Are you sure you want to delete the following conference?</p>
     <p>Conference Name: <b>{{ object.conference_name }}</b></p>
+
     <form method="post">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="Confirm">
-    </form><br>
+    </form> <br>
     
-        <form action="{% url 'conferences' %}" method="get">
+    <form action="{% url 'conferences' %}" method="get">
           <input class="btn btn-success" type="submit" value="Cancel">
-      </form>
+    </form>
  
 </div>
 </body>
+
 {% endblock %}

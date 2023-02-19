@@ -1,11 +1,14 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <style>
     h1 {
       font-family: 'Britannic Bold', sans-serif;
-    }
+       }
     
-  </style>
+</style>
+
 <body >
 <h1 >Event Form</h1>
 <hr color="black" size="5">
@@ -16,5 +19,7 @@
         {{ form.as_p }}
         <input style="margin: 5px;"class="btn btn-success" type="submit" value="Create event">
     </form>
+
 </body>
+
 {% endblock %}

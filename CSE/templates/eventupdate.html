@@ -1,19 +1,24 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <style>
     h1 {
       font-family: 'Britannic Bold', sans-serif;
-    }
-    
-  </style>
+       } 
+</style>
+
 <body >
 <h1 align="center">Event Update</h1>
 <hr color="black" size="5">
 <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'myevent_details' %}">Go back</a></button>
+
 <form method="post" >
     {% csrf_token %}
     {{ form.as_p }}
     <input style="margin: 5px;"class="btn btn-success"type="submit" value="Update Event" >
 </form>
+
 </body>
+
 {% endblock %}

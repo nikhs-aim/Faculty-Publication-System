@@ -1,14 +1,15 @@
 {%  extends 'main.html' %}
-{% block content %}<body>
+
+{% block content %}
+<body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
-        
-      </style>
+           }
+    </style>
 
     
-<body >
+<body>
 <div align="center">
     <h1>Update Journal</h1>
     <hr color="black" size="5">
@@ -18,7 +19,8 @@
         {{form.as_p}}
         <input class="btn btn-success" type="submit" value="Update">
     </form>
-    
 </div>
+
 </body>
+
 {% endblock %}

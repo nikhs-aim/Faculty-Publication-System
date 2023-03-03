@@ -1,11 +1,11 @@
 {%  extends 'main.html' %}
+
 {% block content %}
 <style>
     h1 {
       font-family: 'Britannic Bold', sans-serif;
-    }
-    
-  </style>
+       }
+</style>
 
 <body style="text-align:center;">
 <h1>Your Publications</h1>
@@ -20,6 +20,7 @@
 <br>
 <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'post_details' %}">Go Back</a></button>
 </body>
+
 {% endblock %}
 
 

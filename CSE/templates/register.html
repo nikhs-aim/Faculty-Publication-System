@@ -1,20 +1,21 @@
 {%  extends 'main.html' %}
 {% block content %}
 <body >
-        <style>
-                h1 {
-                  font-family: 'Britannic Bold', sans-serif;
-                }
-                
-        </style>
+<style>
+        h1 {
+        font-family: 'Britannic Bold', sans-serif;
+           }
+</style>
+
 <h1>Register Your Account</h1>
 <hr color="black" size="5">
 <form method="post" autocomplete="off">
-                {% csrf_token %}
-                {{form.as_p}}
+        {% csrf_token %}
+        {{form.as_p}}
         <input style="margin: 5px;" class="btn btn-success"type="submit" value="Register"><br>
         Go back to home page:<button style="margin: 5px;" class="btn btn-dark"><a href="/">Go back</a></button>
 </form>
 
-</body>           
+</body> 
+          
 {% endblock %}

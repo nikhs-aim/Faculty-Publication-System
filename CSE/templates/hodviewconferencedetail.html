@@ -1,31 +1,36 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
+           }
         
-      </style>
+    </style>
+
 <h1 align="center">Faculty Conference List</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'hodoptions' %}">Go back <span class="sr-only">(current)</span></a>
         </li>
+
       </ul>
+
       <form action="{% url 'searchfacpublications' %}" method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="cc" value="{{ request.GET.cc }}" placeholder="Enter faculty name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Conference">
-    </form>
+      </form>
+
     </div>
+
   </nav>
+
 <br>
-
-
-
-
 
 <table class="table">
     <thead class="thead-light">
@@ -40,36 +45,42 @@
            
         </tr>
     </thead>
+
     <tbody>
         {% for i in conferences reversed %}
             <tr>
            
-           
-               <td>{{i.fac_id.username}}</td>
-           
-                <td>{{i.conference_name}}</td>
-                <td>{{i.conference_id}}</td>
-                <td>{{i.conference_doi}}</td>
-                <td>{{ i.ugc_listed }}</td>
+              <td>{{i.fac_id.username}}</td>
+              <td>{{i.conference_name}}</td>
+              <td>{{i.conference_id}}</td>
+              <td>{{i.conference_doi}}</td>
+              <td>{{ i.ugc_listed }}</td>
 
-                <td>
-                    {% if i.conference_article %}
-                    <div class="d-flex">
+              <td>
+                  {% if i.conference_article %}
+
+                  <div class="d-flex">
                       <div style="margin-right: 10px;">
+
                         <form action="{{ i.conference_article.url }}" method="get" target="_blank">
                           <input class="btn btn-info" type="submit" value="View PDF">
                         </form>
+
                       </div>
-                      <div>
-                        <button type="button" class="btn btn-outline-primary"><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
-                      </div>
+                    <div>
+                       <button type="button" class="btn btn-outline-primary"><a href="{{ i.conference_article.url }}" target="_blank" download>Downoad PDF</a></button>
                     </div>
-                    {% endif %}
-                  </td>
-                  
+                    
+                  </div>
+
+                  {% endif %}
+              </td>
                   
             </tr>
+
         {% endfor %}
+
     </tbody>
-</table
+</table>
+
 {% endblock %}

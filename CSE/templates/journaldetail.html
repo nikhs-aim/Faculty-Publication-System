@@ -1,12 +1,14 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
-        
-      </style>
+           }
+    </style>
+
 <h1 align="center">My Journal List</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -18,20 +20,24 @@
         {% else %}
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'otheroptions' %}">Go back <span class="sr-only">(current)</span></a>
-          </li>
+        </li>
           {% endif %}
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'journ-create' %}">Add Journal <span class="sr-only">(current)</span></a>
-          </li>
+        </li>
 
       </ul>
+
       <form action="{% url 'searchjpublications' %}"method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="j" value="{{ request.GET.j }}" placeholder="Enter Journal name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Journal">
     </form>
+
     </div>
-  </nav>
-  <br>
+</nav>
+
+<br>
+
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -64,8 +70,8 @@
                       </div>
                     </div>
                     {% endif %}
-                  </td>
-                  <td>
+                </td>
+                <td>
                     <form action="{% url 'journal_update' i.pk %}" method="get">
                         <input class="btn btn-primary" type="submit" value="Update">
                     </form>
@@ -74,11 +80,13 @@
                     <form action="{% url 'journal_delete' i.pk %}" method="get">
                         <input class="btn btn-danger" type="submit" value="Delete" >
                     </form>
-                
                 </td>
                 
             </tr>
+
         {% endfor %}
+
     </tbody>
-</table
+</table>
+
 {% endblock %}

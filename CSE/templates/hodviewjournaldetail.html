@@ -1,12 +1,15 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <body>
     <style>
         h1 {
           font-family: 'Britannic Bold', sans-serif;
-        }
+           }
         
-      </style>
+    </style>
+
 <h1 align="center">Faculty Journal List</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -18,17 +21,15 @@
       <form action="{% url 'searchfacjpublications' %}" method="get" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" name="jj" value="{{ request.GET.jj }}" placeholder="Enter faculty name">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="Search Journal">
-    </form>
+     </form>
     </div>
-  </nav>
+</nav>
+<br>
 <br>
 
-
-<br>
 <table class="table">
     <thead class="thead-light">
         <tr>
-            
             <th scope="col">Faculty</th>
             <th scope="col">Journal name</th>
             <th scope="col">Journal ID</th>
@@ -41,8 +42,7 @@
         {% for i in journals reversed %}
             <tr>
                 
-                    <td>{{i.fac_id.username}}</td>
-               
+                <td>{{i.fac_id.username}}</td>
                 <td>{{i.journal_name}}</td>
                 <td>{{i.journal_id}}</td>
                 <td>{{i.journal_doi}}</td>
@@ -60,11 +60,14 @@
                       </div>
                     </div>
                     {% endif %}
-                  </td>
+                </td>
                   
             </tr>
+
         {% endfor %}
+        
     </tbody>
+
 </table
 
 {% endblock %}

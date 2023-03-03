@@ -1,11 +1,13 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <style>
     h1 {
       font-family: 'Britannic Bold', sans-serif;
-    }
-    
-  </style>
+       }
+</style>
+
 <body >
 <h1 align="center">Edit Event</h1>
 <hr color="black" size="5">
@@ -42,11 +44,12 @@
                     <form action="{% url 'event_delete' i.id %}" method="get">
                         <input class="btn btn-danger" type="submit" value="Delete" >
                     </form>
-                
                 </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+
 </body>
+
 {% endblock %}

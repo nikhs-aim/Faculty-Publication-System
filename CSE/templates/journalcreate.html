@@ -23,43 +23,33 @@
     <p>
           <label for="id_journal_name">Journal name:</label>
            <input type="text" name="journal_name" maxlength="255" required="" id="id_journal_name" placeholder="Enter Journal name">
-    
     </p>
 
   
-  <p>
-    <label for="id_journal_article">Journal article:</label>
-    <input type="file" name="journal_article" required="" id="id_journal_article">
-    
-    
-  </p>
+    <p>
+          <label for="id_journal_article">Journal article:</label>
+          <input type="file" name="journal_article" required="" id="id_journal_article">
+    </p>
+
+    <p>
+          <label for="id_journal_doi">Journal ISSN:</label>
+          <input type="number" name="journal_doi" id="id_journal_doi" placeholder="Enter ISSN">
+    </p>
 
   
-  <p>
-    <label for="id_journal_doi">Journal ISSN:</label>
-    <input type="number" name="journal_doi" id="id_journal_doi" placeholder="Enter ISSN">
-    
-    
-  </p>
-
-  
-  <p>
-    <label for="id_ugc_listed">Ugc listed:</label>
-    <select name="ugc_listed" required="" id="id_ugc_listed">
-  <option value="" selected="">---------</option>
-
-  <option value="Yes">Yes</option>
-
-  <option value="No">No</option>
-
-</select>
-    
-    
-      
-    
-  </p>
+    <p>
+         <label for="id_ugc_listed">Ugc listed:</label>
+         <select name="ugc_listed" required="" id="id_ugc_listed">
+         <option value="" selected="">---------</option>
+         <option value="Yes">Yes</option>
+         <option value="No">No</option>
+         </select>
+    </p>
         <input class="btn btn-success" type="submit" value="submit">
     </form>
+
 </div>
+
 </body>
+
 {% endblock %}

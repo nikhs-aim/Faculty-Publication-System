@@ -10,14 +10,8 @@
 
 <body>
     <h1 align="center">Search Faculty Conference Publications</h1><hr>
-    
-    
       <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'hodviewotherconf' %}">Go back</a></button><br><br>
-    
-    
-
       
-    
     {% if submit %}
     <h3>Search results for "{{ request.GET.cc }}"</h3>
     {% if results %}

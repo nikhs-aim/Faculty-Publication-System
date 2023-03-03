@@ -1,23 +1,29 @@
 {%  extends 'main.html' %}
+
 {% block content %}
+
 <style>
     h1 {
       font-family: 'Britannic Bold', sans-serif;
-    }
+       }
     
-  </style>
+</style>
 
 <body style="text-align:center;">
 <h1>Faculty Publications</h1>
-
 <hr color="black" size="5">
+
 <form action="{% url 'hodviewotherconf' %}" method="get">
     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Published Conferences" >
-</form><br><br>
+
+</form> <br><br>
+
 <form action="{% url 'hodviewotherjourn' %}" method="get">
     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Published Journals" >
-</form>
-<br>
+</form> <br>
+
 <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'post_details' %}">Go Back</a></button>
+
 </body>
+
 {% endblock %}

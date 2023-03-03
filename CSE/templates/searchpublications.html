@@ -10,14 +10,7 @@
 
     <h1 align="center">Search your Publications</h1>
     <hr color="black" size="5">
-    
-    
-      <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'conferences' %}">Go back</a></button><br><br>
-    
-    
-
-      
-    
+    <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'conferences' %}">Go back</a></button><br><br>    
     {% if submit %}
     <h5>Search results for "{{ request.GET.c }}"</h5>
     {% if results %}

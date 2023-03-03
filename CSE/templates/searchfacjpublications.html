@@ -11,17 +11,8 @@
 <body>
     <h1 align="center">Search Faculty Journal Publications</h1>
     <hr color="black" size="5">
-    
-    
-      <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'hodviewotherjourn' %}">Go back</a></button><br><br>
-    
-    
-
-   
-    
-
-      
-    
+    <button style="margin: 10px;" type="button" class="btn btn-dark"><a href="{% url 'hodviewotherjourn' %}">Go back</a></button><br><br>
+  
     {% if submit %}
     <h3>Search results for "{{ request.GET.jj }}"</h3>
     {% if results %}
@@ -63,9 +54,13 @@
       {% endfor %}
         </tbody>
       </table>
+
     {% else %}
       <p>No results found</p>
     {% endif %}
+
   {% endif %}
+
 </body>
+
 {% endblock %}
